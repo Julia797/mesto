@@ -1,16 +1,21 @@
 .header {
   margin: 0;
-  max-width: 1280px;
+
   width: 100%;
-  padding: 0 0 41px;
+  padding-bottom: 40px;
   box-sizing: border-box;
   border-bottom: 1px solid #545454;
-}
+  display: flex;
+
+ }
 
 @media screen and (max-width: 1280px) {
   .header {
-    padding-left: calc(0px + (0 - 8) * (100vw - 320px) / (1280 - 320));
-    padding-bottom: calc(38px + (41 - 38) * (100vw - 320px) / (1280 - 320));
+    /*padding-left: calc(0px + (0 - 8) * (100vw - 320px) / (1280 - 320));
+    /*padding-bottom: calc(38px + (41 - 38) * (100vw - 320px) / (1280 - 320));
+    padding-left: calc(0px + (200 - 0) * (100vw - 320px) / (1280 - 320));
+    padding-right: calc(0px + (200 - 0) * (100vw - 320px) / (1280 - 320));*/
+
   }
 }
 
@@ -18,7 +23,20 @@
 
 @media screen and (max-width: 320px) {
   .header {
+    padding-bottom: 31px;
     padding-left: 8px;
-    padding-bottom: 38px;
   }
 }
+
+.header__logo {
+  width: 100%;
+  max-width: 142px;
+  display: block;
+}
+
+@media screen and (max-width: 320px) {
+  .header__logo {
+    max-width: 103px;
+  }
+}
+
