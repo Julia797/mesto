@@ -1,2 +1,18 @@
+.profile__info {
+  position: relative;
+  left: -129px;
+  box-sizing: border-box;
+  margin: 0;
+  max-width: 336px;
+  display: flex;
+  flex-direction: column;
+}
 
+@media screen and (max-width: 800px) {
+  .profile__info {
+    padding-bottom: 32px;
+    margin: 0;
+    left: 0;
+  }
+}
 
