@@ -12,20 +12,20 @@
 
     <div class="page">
 
-      <header class="header indent">
+      <header class="header">
         <img class="header__logo" src="./images/header-logo.svg" alt="логотип Место">
       </header>
 
       <main class="content">
 
         <section class="profile indent">
-          <img class="profile__avatar" src="./images/image.jpg" alt="фотография Жак-Ив Кусто">
+          <img class="profile__avatar" src="./images/image.jpg" alt="аватарка">
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <h2 class="profile__subtitle">Исследователь океана</h2>
-            <button class="btn-edit button" type="button"></button>
+            <button class="profile__btn-edit button" type="button" aria-label="редактировать профиль"></button>
           </div>
-          <button class="btn-plus button"></button>
+          <button class="profile__btn-plus button"></button>
         </section>
 
         <section class="elements">
@@ -34,7 +34,7 @@
               <img class="element__foto" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="изображение старинной крепости">
               <div class="element__info">
                 <h2 class="element__title">Карачаевск</h2>
-                <button class="btn-like" type="button"></button>
+                <button class="btn-like" type="button" aria-label="лайк"></button>
               </div>
             </li>
 
@@ -42,7 +42,7 @@
               <img class="element__foto" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="вид на гору Эльбрус">
               <div class="element__info">
                 <h2 class="element__title">Гора Эльбрус</h2>
-                <button class="btn-like" type="button"></button>
+                <button class="btn-like" type="button" aria-label="лайк"></button>
               </div>
             </li>
 
@@ -50,7 +50,7 @@
               <img class="element__foto" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="изображение леса на фоне горы">
               <div class="element__info">
                 <h2 class="element__title">Домбай</h2>
-                <button class="btn-like" type="button"></button>
+                <button class="btn-like" type="button" aria-label="лайк"></button>
               </div>
             </li>
 
@@ -58,7 +58,7 @@
               <img class="element__foto" src="./images/anadlsy-wIPyqJZ3tb4-unsplash.jpg" alt="изображение Храма Вознесения">
               <div class="element__info">
                 <h2 class="element__title">Коломенское</h2>
-                <button class="btn-like" type="button"></button>
+                <button class="btn-like" type="button" aria-label="лайк"></button>
               </div>
             </li>
 
@@ -66,7 +66,7 @@
               <img class="element__foto" src="./images/egor-myznik-Az09rLyiVrc-unsplash.jpg" alt="изображение монастыря">
               <div class="element__info">
                 <h2 class="element__title">Сергиев Посад</h2>
-                <button class="btn-like" type="button"></button>
+                <button class="btn-like" type="button" aria-label="лайк"></button>
               </div>
             </li>
 
@@ -74,22 +74,24 @@
               <img class="element__foto" src="./images/viktor-solomonik-A1-Y5H4chZs-unsplash.jpg" alt="изображение Красной Площади">
               <div class="element__info">
                 <h2 class="element__title">Москва</h2>
-                <button class="btn-like" type="button"></button>
+                <button class="btn-like" type="button" aria-label="лайк"></button>
               </div>
             </li>
           </ul>
 
         </section>
         <section class="popup">
-          <form class="popup__container">
-            <h2 class="popup__heading">Редактировать профиль</h2>
-            <fieldset class="popup__input">
-              <input type="text" id="name" placeholder="Жак-Ив Кусто" class="popup__name">
-              <input type="text" id="contact" placeholder="Исследователь океана" class="popup__info">
-            </fieldset>
-            <button class="btn-save" type="submit">Сохранить</button>
-            <button class="btn-close button" type="button"></button>
-          </form>
+          <div class="popup__container">
+            <form class="popup__form">
+              <h2 class="popup__heading">Редактировать профиль</h2>
+              <fieldset class="popup__input">
+                <input type="text" id="name" placeholder="Жак-Ив Кусто" class="popup__name">
+                <input type="text" id="contact" placeholder="Исследователь океана" class="popup__info">
+              </fieldset>
+              <button class="popup__btn-save" type="submit" aria-label="сохранить">Сохранить</button>
+              <button class="popup__btn-close button" type="button" aria-label="закрыть"></button>
+            </form>
+          </div>
         </section>
       </main>
 
