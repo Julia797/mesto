@@ -1,6 +1,6 @@
-.popup__info {
-  margin: 0 0 48px 0;
-  padding: 0 0 9px 0;
+.form__name {
+  margin: 0 0 29px 0;
+  padding: 0 0 10px 0;
   border: 0;
   border-bottom: 1px solid #000;
   box-sizing: border-box;
@@ -11,8 +11,8 @@
 }
 
 @media screen and (max-width : 600px) {
-  .popup__info {
-    margin: 0 0 45px 0;
+  .form__name {
+    padding: 0 0 8px 0;
   }
 }
 

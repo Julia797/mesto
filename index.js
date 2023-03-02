@@ -10,12 +10,12 @@ btnClose.addEventListener('click', function () {
   popup.classList.remove('popup_opened');
 });
 
-let form = document.querySelector('.popup__form');
-let nameInput = document.querySelector('.popup__name');
-let infoInput = document.querySelector('.popup__info');
+let form = document.querySelector('.form');
+let nameInput = document.querySelector('.form__name');
+let infoInput = document.querySelector('.form__info');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
-let btnSave = document.querySelector('.popup__btn-save');
+let btnSave = document.querySelector('.form__btn-save');
 
 btnSave.addEventListener('click', function handleFormSubmit (evt) {
   evt.preventDefault();
