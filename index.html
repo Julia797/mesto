@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Проект Место</title>
     <link rel="stylesheet" href="./pages/index.css">
-    <link rel="stylesheet" href="./pages/index1.css">
   </head>
 
   <body class="body">
@@ -23,8 +22,8 @@
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <h2 class="profile__subtitle">Исследователь океана</h2>
-            <button class="profile__btn-edit button" type="button" aria-label="редактировать профиль"></button>
           </div>
+          <button class="profile__btn-edit button" type="button" aria-label="редактировать профиль"></button>
           <button class="profile__btn-plus button"></button>
         </section>
 
@@ -85,8 +84,8 @@
             <form class="form">
               <h2 class="form__heading">Редактировать профиль</h2>
               <fieldset class="form__input">
-                <input type="text" id="name" placeholder="Жак-Ив Кусто" class="form__name">
-                <input type="text" id="contact" placeholder="Исследователь океана" class="form__info">
+                <input type="text" id="name" placeholder="Введите имя" class="form__name" name="name">
+                <input type="text" id="contact" placeholder="Введите профессию" class="form__info" name="contact">
               </fieldset>
               <button class="form__btn-save" type="submit" aria-label="сохранить">Сохранить</button>
             </form>
@@ -99,6 +98,6 @@
         <p class="footer__copyright">© 2023 Mesto Russia</p>
       </footer>
     </div>
-    <script src="./index.js"></script>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>

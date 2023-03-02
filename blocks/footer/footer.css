@@ -5,14 +5,8 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 1280px) {
-  .footer {
-    padding-top: calc(48px + (67 - 48) * (100vw - 320px) / (1280 - 320));
-  }
-}
-
 @media screen and (max-width: 320px) {
   .footer {
-    padding-top: 48px;
+    padding-top: 51px;
   }
 }

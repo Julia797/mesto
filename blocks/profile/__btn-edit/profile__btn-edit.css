@@ -2,24 +2,34 @@
   height: 24px;
   width: 24px;
   padding: 0;
-  margin: 0;
+  margin: 0 0 0 19px;
   background-image: url("../../../images/edit-button.svg");
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  position: absolute;
-  top: 16px;
-  right: -44px;
+  transform: translate(0,-11px);
   border: 0;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 700px) {
   .profile__btn-edit {
     width: 18px;
     height: 18px;
-    top: 5px;
-    right: -27px;
+    position: absolute;
+    top: 207px;
+    right: calc(39px + (200 - 39) * (100vw - 320px) / (700 - 320));
   }
 }
 
+/*@media screen and (max-width: 500px) {
+  .profile__btn-edit {
+    right: 10%;
+  }
+}*/
+
+@media screen and (max-width: 320px) {
+  .profile__btn-edit {
+    right: 39px;
+  }
+}
