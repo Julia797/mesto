@@ -22,12 +22,6 @@
   }
 }
 
-/*@media screen and (max-width: 500px) {
-  .profile__btn-edit {
-    right: 10%;
-  }
-}*/
-
 @media screen and (max-width: 320px) {
   .profile__btn-edit {
     right: 39px;
