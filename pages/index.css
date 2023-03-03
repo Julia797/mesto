@@ -4,6 +4,7 @@
 @import url(../blocks/page/page.css);
 @import url(../blocks/content/content.css);
 @import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/indent/indent.css);
 @import url(../blocks/button/button.css);
 @import url(../blocks/profile/profile.css);
@@ -20,11 +21,12 @@
 @import url(../blocks/element/__info/element__info.css);
 @import url(../blocks/element/__title/element__title.css);
 @import url(../blocks/btn-like/btn-like.css);
+@import url(../blocks/btn-like/_active/btn-like_active.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__btn-close/popup__btn-close.css);
 @import url(../blocks/popup/__container/popup__container.css);
-@import url(../blocks/form/__heading/form__heading.css);
+@import url(../blocks/popup/__heading/popup__heading.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__name/form__name.css);
 @import url(../blocks/form/__info/form__info.css);

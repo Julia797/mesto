@@ -16,8 +16,3 @@
   opacity: .5;
   transition: 1s;
 }
-
-.btn-like_active {
-  background-image: url("../../images/likeakt-button.svg");
-}
-

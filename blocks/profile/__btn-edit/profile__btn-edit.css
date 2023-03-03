@@ -5,11 +5,12 @@
   margin: 0 0 0 19px;
   background-image: url("../../../images/edit-button.svg");
   background-color: transparent;
+  box-sizing: border-box;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: 10px 10px;
+  border: 2px solid #fff;
   transform: translate(0,-11px);
-  border: 0;
 }
 
 @media screen and (max-width: 700px) {
@@ -24,6 +25,7 @@
 
 @media screen and (max-width: 320px) {
   .profile__btn-edit {
+    background-size: 7px 7px;
     right: 39px;
   }
 }
