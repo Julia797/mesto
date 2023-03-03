@@ -12,7 +12,7 @@
   z-index: 2;
 }
 
-@media screen and (max-width : 600px) {
+@media screen and (max-width: 600px) {
   .popup__container {
     min-height: 322px;
     width: 282px;
@@ -22,7 +22,7 @@
   }
 }
 
-@media screen and (max-width : 320px) {
+@media screen and (max-width: 320px) {
   .popup__container {
     left: 19px;
   }
