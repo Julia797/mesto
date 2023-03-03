@@ -1,10 +1,17 @@
 .form__input {
   margin: 0;
-  padding: 0;
+  padding: 46px 0 48px;
   border: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  gap: 30px;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 600px) {
+  .form__input {
+    padding: 75px 0 45px;
+  }
 }
 

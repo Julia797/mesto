@@ -1,6 +1,6 @@
-.form__name {
-  margin: 0 0 29px 0;
-  padding: 0 0 10px 0;
+.form__item {
+  margin: 0;
+  padding: 0 0 9px 0;
   border: 0;
   border-bottom: 1px solid #000;
   box-sizing: border-box;
@@ -9,10 +9,3 @@
   font-weight: 400;
   line-height: 121%;
 }
-
-@media screen and (max-width: 600px) {
-  .form__name {
-    padding: 0 0 8px 0;
-  }
-}
-
