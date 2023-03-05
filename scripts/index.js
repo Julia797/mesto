@@ -1,11 +1,11 @@
-let popup = document.querySelector('.popup');
-let btnEdit = document.querySelector('.profile__btn-edit');
-let btnClose = popup.querySelector('.popup__btn-close');
-let form = document.querySelector('.form');
-let nameInput = form.querySelector('.form__item_type_name');
-let infoInput = form.querySelector('.form__item_type_contact');
-let profileTitle = document.querySelector('.profile__title');
-let profileSubtitle = document.querySelector('.profile__subtitle');
+const popup = document.querySelector('.popup');
+const btnEdit = document.querySelector('.profile__btn-edit');
+const btnClose = popup.querySelector('.popup__btn-close');
+const form = document.querySelector('.form');
+const nameInput = form.querySelector('.form__item_type_name');
+const infoInput = form.querySelector('.form__item_type_contact');
+const profileTitle = document.querySelector('.profile__title');
+const profileSubtitle = document.querySelector('.profile__subtitle');
 
 function closePopap() {
   popup.classList.remove('popup_opened')
@@ -30,4 +30,5 @@ form.addEventListener('submit', handleFormSubmit);
 btnClose.addEventListener('click', function () {
   closePopap();
 });
+
 

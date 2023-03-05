@@ -10,9 +10,10 @@
   font-weight: 400;
   line-height: 122%;
   text-align: center;
-  color: #FFF;
+  color: #fff;
   border: 0;
   transition: background-color 1s ease;
+  cursor: pointer;
 }
 
 .form__btn-save:hover {
