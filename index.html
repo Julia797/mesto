@@ -23,13 +23,13 @@
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
-          <button class="profile__btn-edit button" type="button" aria-label="редактировать профиль"></button>
-          <button class="profile__btn-plus button" type="button" aria-label="добавить карточку"></button>
+          <button class="profile__btn-edit button btnOpen" type="button" aria-label="редактировать профиль"></button>
+          <button class="profile__btn-plus button btnOpen" type="button" aria-label="добавить карточку"></button>
         </section>
 
         <section class="elements">
           <ul class="element">
-            <li class="element__item">
+        <!--     <li class="element__item">
               <img class="element__foto" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="изображение старинной крепости">
               <div class="element__info">
                 <h2 class="element__title">Карачаевск</h2>
@@ -75,7 +75,7 @@
                 <h2 class="element__title">Москва</h2>
                 <button class="btn-like" type="button" aria-label="лайк"></button>
               </div>
-            </li>
+            </li>-->
           </ul>
         </section>
       </main>
@@ -85,19 +85,51 @@
       </footer>
     </div>
 
-    <div class="popup">
+    <div class="popup popup_contacts">
       <div class="popup__container">
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <form class="form" name="contacts">
+        <form class="form form_contacts" name="contacts">
           <fieldset class="form__input">
             <input type="text" id="name" placeholder="Введите имя" class="form__item form__item_type_name" name="name">
             <input type="text" id="contact" placeholder="Введите профессию" class="form__item form__item_type_contact" name="contact">
           </fieldset>
           <button class="form__btn-save" type="submit" aria-label="сохранить">Сохранить</button>
         </form>
-        <button class="popup__btn-close button" type="button" aria-label="закрыть"></button>
+        <button class="popup__btn-close 1 button" type="button" aria-label="закрыть"></button>
       </div>
     </div>
+
+    <div class="popup popup_newFoto">
+      <div class="popup__container">
+        <h2 class="popup__heading">Новое место</h2>
+        <form class="form form_newFoto" name="foto">
+          <fieldset class="form__input">
+            <input type="text" id="nameFoto" placeholder="Название фото" class="form__item form__item_type_nameFoto" name="nameFoto">
+            <input type="url" id="newFoto" placeholder="Введите ссылку на фото" class="form__item form__item_type_newFoto" name="newFoto">
+          </fieldset>
+          <button class="form__btn-save" type="submit" aria-label="сохранить">Сохранить</button>
+        </form>
+        <button class="popup__btn-close 2 button" type="button" aria-label="закрыть"></button>
+      </div>
+    </div>
+
+    <div class="popup popup_preview">
+      <div class="popup__container">
+        <img class="" src="#" alt="">
+        <button class="popup__btn-close 3 button" type="button" aria-label="закрыть"></button>
+      </div>
+    </div>
+
+    <template id="card-template">
+       <li class="element__item">
+        <img class="element__foto" src="#" alt="">
+        <div class="element__info">
+          <h2 class="element__title"></h2>
+          <button class="btn-like" type="button" aria-label="лайк"></button>
+          <button class="btn-delete button" type="button" aria-label="удалить"></button>
+        </div>
+      </li>
+    </template>
 
     <script src="./scripts/index.js"></script>
   </body>
