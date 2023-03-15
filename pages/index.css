@@ -28,6 +28,10 @@
 @import url(../blocks/popup/__btn-close/popup__btn-close.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__heading/popup__heading.css);
+@import url(../blocks/popup/_zoom/popup_zoom.css);
+@import url(../blocks/popup/__fotoZoom/popup__fotoZoom.css);
+@import url(../blocks/popup/__titleZoom/popup__titleZoom.css);
+@import url(../blocks/popup/__containerZooom/popup__containerZooom.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__item/form__item.css);
 @import url(../blocks/form/__btn-save/form__btn-save.css);

@@ -89,14 +89,14 @@ const plusLike = function(evt) {
   evt.target.classList.toggle('btn-like_active');
 };
 
-const popupFotoZoom = document.querySelector('popup__fotoZoom');
+const popupFotoZoom = popupZoom.querySelector('.popup__fotoZoom');
+const popupTitle = popupZoom.querySelector('.popup__titleZoom');
 const zoomFoto = function(evt) {
-
-  //const elementTitle = document.querySelector('.element__title');
-
-  popupFotoZoom.src = evt.target.link;
-  //elementTitle.textContent = title;
-  popupFotoZoom.alt = evt.target.title;
+  console.log('klik');
+  console.log(popupFotoZoom);
+  popupFotoZoom.src = evt.target.src;
+  popupTitle.textContent = evt.target.textContent;
+  popupFotoZoom.alt = evt.target.alt;
   openPopup(popupZoom);
 }
 
