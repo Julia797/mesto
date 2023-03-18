@@ -68,7 +68,7 @@ const zoomFoto = function(evt) {
   openPopup(popupZoom);
 }
 
-function cardPlus(title, link) {
+function createCard(title, link) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardItem = cardTemplate.cloneNode(true);
   const elementFoto = cardItem.querySelector('.element__foto');
@@ -85,19 +85,18 @@ function cardPlus(title, link) {
 };
 
 initialCards.forEach(function(item) {
-  element.append(cardPlus(item.name, item.link));
+  element.append(createCard(item.name, item.link));
 });
 
 const nameNewFoto = popupNewFoto.querySelector('.form__item_type_nameFoto');
 const linkNewFoto = popupNewFoto.querySelector('.form__item_type_newFoto');
 
-function NewFotoFormSubmit (evt) {
+function handleNewFotoSubmit (evt) {
   evt.preventDefault();
-  element.prepend(cardPlus(nameNewFoto.value, linkNewFoto.value));
-  nameNewFoto.value = nameNewFoto.textContent;
-  linkNewFoto.value = linkNewFoto.textContent;
+  element.prepend(createCard(nameNewFoto.value, linkNewFoto.value));
+  evt.target.reset();
    closePopup(popupNewFoto);
 };
 
-formNewFoto.addEventListener('submit', NewFotoFormSubmit);
+formNewFoto.addEventListener('submit', handleNewFotoSubmit);
 
