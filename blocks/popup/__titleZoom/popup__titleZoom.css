@@ -8,8 +8,15 @@
   line-height: 15px;
   text-align: left;
   height: 12px;
-  width: 291px;
-  border: 2px solid red;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 291px;
 }
 
+@media screen and (max-width: 600px) {
+  .popup__titleZoom {
+    max-width: 240px;
+  }
+}
 

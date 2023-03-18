@@ -11,7 +11,7 @@ const nameInput = popupContacts.querySelector('.form__item_type_name');
 const infoInput = popupContacts.querySelector('.form__item_type_contact');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
-const elementsFoto = document.querySelectorAll('.element__foto');
+//const elementsFoto = document.querySelectorAll('.element__foto');
 
 
 function closePopup(item) {
@@ -91,36 +91,36 @@ const plusLike = function(evt) {
 
 const popupFotoZoom = popupZoom.querySelector('.popup__fotoZoom');
 const popupTitle = popupZoom.querySelector('.popup__titleZoom');
+
 const zoomFoto = function(evt) {
   console.log('klik');
-  console.log(popupFotoZoom);
   popupFotoZoom.src = evt.target.src;
-  popupTitle.textContent = evt.target.textContent;
+  popupTitle.textContent = evt.target.alt;
   popupFotoZoom.alt = evt.target.alt;
   openPopup(popupZoom);
 }
 
 function cardPlus(title, link) {
-  const cardTemplate = document.querySelector('#card-template');
-  const cardItem = cardTemplate.content.cloneNode(true);
-  cardItem.querySelector('.element__title').textContent = title;
-  cardItem.querySelector('.element__foto').src = link;
-  cardItem.querySelector('.element__foto').alt = title;
+  const cardTemplate = document.querySelector('#card-template').content;
+  const cardItem = cardTemplate.cloneNode(true);
+  const elementFoto = cardItem.querySelector('.element__foto');
+  const elementTitle = cardItem.querySelector('.element__title');
+  elementTitle.textContent = title;
+  console.log(title);
+  elementFoto.src = link;
+  elementFoto.alt = title;
   const btnDelete = cardItem.querySelector('.btn-delete');
   btnDelete.addEventListener('click', deleteCard);
   const btnLike = cardItem.querySelector('.btn-like');
   btnLike.addEventListener('click', plusLike);
-  const elementFoto = cardItem.querySelector('.element__foto');
   elementFoto.addEventListener('click', zoomFoto);
   return cardItem;
 };
 
-
-
 initialCards.forEach(function(item) {
-  title = item.name;
-  link = item.link;
-element.append(cardPlus(title, link));
+  //title = item.name;
+  //link = item.link;
+  element.append(cardPlus(item.name, item.link));
 });
 
 const nameNewFoto = popupNewFoto.querySelector('.form__item_type_nameFoto');
@@ -128,20 +128,12 @@ const linkNewFoto = popupNewFoto.querySelector('.form__item_type_newFoto');
 
 function NewFotoFormSubmit (evt) {
   evt.preventDefault();
-  title = nameNewFoto.value;
-  link = linkNewFoto.value;
-  element.prepend(cardPlus(title, link));
+  //title = nameNewFoto.value;
+  //link = linkNewFoto.value;
+  element.prepend(cardPlus(nameNewFoto.value, linkNewFoto.value));
+  nameNewFoto.value = nameNewFoto.textContent;
+  linkNewFoto.value = linkNewFoto.textContent;
   closePopup(popupNewFoto);
 };
 formNewFoto.addEventListener('submit', NewFotoFormSubmit);
-
-
-/*elementsFoto.forEach(function(item) {
-  item.addEventListener('click', function () {
-  console.log('klik');
-  openPopup(popup_zoom);
-});
-});*/
-
-
 

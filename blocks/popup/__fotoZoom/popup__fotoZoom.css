@@ -2,12 +2,10 @@
   margin: 0;
   padding: 0;
   display: block;
-
   max-width: 75vw;
   max-height: 75vh;
   object-fit: cover;
   object-position: top;
-  border: 2px solid rgb(0, 255, 34);
 }
 
 
