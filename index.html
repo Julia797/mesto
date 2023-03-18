@@ -27,55 +27,8 @@
           <button class="profile__btn-plus button btnOpen" type="button" aria-label="добавить карточку"></button>
         </section>
 
-        <section class="elements">
+        <section class="elements" aria-label="карточки с фотографиями красивых мест">
           <ul class="element">
-        <!--     <li class="element__item">
-              <img class="element__foto" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="изображение старинной крепости">
-              <div class="element__info">
-                <h2 class="element__title">Карачаевск</h2>
-                <button class="btn-like" type="button" aria-label="лайк"></button>
-              </div>
-            </li>
-
-            <li class="element__item">
-              <img class="element__foto" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="вид на гору Эльбрус">
-              <div class="element__info">
-                <h2 class="element__title">Гора Эльбрус</h2>
-                <button class="btn-like" type="button" aria-label="лайк"></button>
-              </div>
-            </li>
-
-            <li class="element__item">
-              <img class="element__foto" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="изображение леса на фоне горы">
-              <div class="element__info">
-                <h2 class="element__title">Домбай</h2>
-                <button class="btn-like" type="button" aria-label="лайк"></button>
-              </div>
-            </li>
-
-            <li class="element__item">
-              <img class="element__foto" src="./images/anadlsy-wIPyqJZ3tb4-unsplash.jpg" alt="изображение Храма Вознесения">
-              <div class="element__info">
-                <h2 class="element__title">Коломенское</h2>
-                <button class="btn-like" type="button" aria-label="лайк"></button>
-              </div>
-            </li>
-
-            <li class="element__item">
-              <img class="element__foto" src="./images/egor-myznik-Az09rLyiVrc-unsplash.jpg" alt="изображение монастыря">
-              <div class="element__info">
-                <h2 class="element__title">Сергиев Посад</h2>
-                <button class="btn-like" type="button" aria-label="лайк"></button>
-              </div>
-            </li>
-
-            <li class="element__item">
-              <img class="element__foto" src="./images/viktor-solomonik-A1-Y5H4chZs-unsplash.jpg" alt="изображение Красной Площади">
-              <div class="element__info">
-                <h2 class="element__title">Москва</h2>
-                <button class="btn-like" type="button" aria-label="лайк"></button>
-              </div>
-            </li>-->
           </ul>
         </section>
       </main>
@@ -95,7 +48,7 @@
           </fieldset>
           <button class="form__btn-save" type="submit" aria-label="сохранить">Сохранить</button>
         </form>
-        <button class="popup__btn-close 1 button" type="button" aria-label="закрыть"></button>
+        <button class="popup__btn-close button" type="button" aria-label="закрыть"></button>
       </div>
     </div>
 
@@ -104,12 +57,12 @@
         <h2 class="popup__heading">Новое место</h2>
         <form class="form form_newFoto" name="foto">
           <fieldset class="form__input">
-            <input type="text" id="nameFoto" placeholder="Название фото" class="form__item form__item_type_nameFoto" name="nameFoto">
-            <input type="url" id="newFoto" placeholder="Введите ссылку на фото" class="form__item form__item_type_newFoto" name="newFoto">
+            <input type="text" id="nameFoto" placeholder="Название" class="form__item form__item_type_nameFoto" name="nameFoto">
+            <input type="url" id="newFoto" placeholder="Ссылка на картинку" class="form__item form__item_type_newFoto" name="newFoto">
           </fieldset>
           <button class="form__btn-save" type="submit" aria-label="сохранить">Сохранить</button>
         </form>
-        <button class="popup__btn-close 2 button" type="button" aria-label="закрыть"></button>
+        <button class="popup__btn-close button" type="button" aria-label="закрыть"></button>
       </div>
     </div>
 
@@ -117,7 +70,7 @@
       <div class="popup__containerZooom">
         <img class="popup__fotoZoom" src="#" alt="#">
         <h2 class="popup__titleZoom"></h2>
-        <button class="popup__btn-close 3 button" type="button" aria-label="закрыть"></button>
+        <button class="popup__btn-close button" type="button" aria-label="закрыть"></button>
       </div>
     </div>
 
@@ -125,13 +78,14 @@
        <li class="element__item">
         <img class="element__foto" src="#" alt="">
         <div class="element__info">
-          <h2 class="element__title"></h2>
+          <h2 class="element__title">#</h2>
           <button class="btn-like" type="button" aria-label="лайк"></button>
           <button class="btn-delete button" type="button" aria-label="удалить"></button>
         </div>
       </li>
     </template>
 
+    <script src="./scripts/kard.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>

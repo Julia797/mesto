@@ -11,7 +11,6 @@ const nameInput = popupContacts.querySelector('.form__item_type_name');
 const infoInput = popupContacts.querySelector('.form__item_type_contact');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
-//const elementsFoto = document.querySelectorAll('.element__foto');
 
 
 function closePopup(item) {
@@ -48,37 +47,7 @@ btnPlus.addEventListener('click', function () {
   openPopup(popupNewFoto);
 });
 
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const element = document.querySelector('.element');
-//const elementFoto = document.querySelector('.element__foto');
-//const elementTitle = document.querySelector('.element__title');
 
 const deleteCard = function(evt) {
   const listItem = evt.target.closest('.element__item');
@@ -93,7 +62,6 @@ const popupFotoZoom = popupZoom.querySelector('.popup__fotoZoom');
 const popupTitle = popupZoom.querySelector('.popup__titleZoom');
 
 const zoomFoto = function(evt) {
-  console.log('klik');
   popupFotoZoom.src = evt.target.src;
   popupTitle.textContent = evt.target.alt;
   popupFotoZoom.alt = evt.target.alt;
@@ -106,7 +74,6 @@ function cardPlus(title, link) {
   const elementFoto = cardItem.querySelector('.element__foto');
   const elementTitle = cardItem.querySelector('.element__title');
   elementTitle.textContent = title;
-  console.log(title);
   elementFoto.src = link;
   elementFoto.alt = title;
   const btnDelete = cardItem.querySelector('.btn-delete');
@@ -118,8 +85,6 @@ function cardPlus(title, link) {
 };
 
 initialCards.forEach(function(item) {
-  //title = item.name;
-  //link = item.link;
   element.append(cardPlus(item.name, item.link));
 });
 
@@ -128,12 +93,11 @@ const linkNewFoto = popupNewFoto.querySelector('.form__item_type_newFoto');
 
 function NewFotoFormSubmit (evt) {
   evt.preventDefault();
-  //title = nameNewFoto.value;
-  //link = linkNewFoto.value;
   element.prepend(cardPlus(nameNewFoto.value, linkNewFoto.value));
   nameNewFoto.value = nameNewFoto.textContent;
   linkNewFoto.value = linkNewFoto.textContent;
-  closePopup(popupNewFoto);
+   closePopup(popupNewFoto);
 };
+
 formNewFoto.addEventListener('submit', NewFotoFormSubmit);
 
