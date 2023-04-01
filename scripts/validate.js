@@ -4,7 +4,7 @@ const log = console.log;
 const validationConfig = {
   formSelector: '.form',
   inputSelector: '.form__item',
-  submitButtinSelector: '.form__btn-save',
+  submitButtonSelector: '.form__btn-save',
   inactiveButtonClass: 'form__btn-save_inactive',
   inputErrorClass: 'form__item_type_error',
   errorClass: 'form__item-error_active'
@@ -32,13 +32,13 @@ function enableValidation ({ formSelector, ...rest }) {
 enableValidation(validationConfig);
 
 //setEventListeners  примает параметром элемент формы и добавляет её полям нужные обработчики:
-function setEventListeners (formElement, { inputSelector, submitButtinSelector, ...rest }) {
+function setEventListeners (formElement, { inputSelector, submitButtonSelector, inactiveButtonClass, ...rest }) {
   // Находим все поля внутри формы,
   // сделаем из них массив методом Array.from
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
-  //const buttonElement = formElement.querySelector(submitButtinSelector);
+  const buttonElement = formElement.querySelector(submitButtonSelector);
   // Вызовем toggleButtonState, чтобы не ждать ввода данных в поля
-  //toggleButtonState(inputList, buttonElement, rest);
+  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
 
   // Обойдём все элементы полученной коллекции
   inputList.forEach((inputElement) => {
@@ -47,11 +47,10 @@ function setEventListeners (formElement, { inputSelector, submitButtinSelector, 
       // Внутри колбэка вызовем isValid,
       // передав ей форму и проверяемый элемент
       isValid(formElement, inputElement, rest);
-     // toggleButtonState(inputList, buttonElement, rest);
+      toggleButtonState(inputList, buttonElement, inactiveButtonClass);
     });
   });
 };
-
 
 
 //isValid — проверяет валидность поля, внутри вызывает showInputError или hideInputError
@@ -70,7 +69,7 @@ function isValid (formElement, inputElement, rest) {
 
 //showInputError — показывает элемент ошибки; показ сообщения об ошибке.
 function showInputError (formElement, inputElement, errorMessage, { inputErrorClass, errorClass }) {
-  // Находим элемент ошибки внутри самой функции
+  // Находим элемент ошибки
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   // Остальной код такой же
   inputElement.classList.add(inputErrorClass);
@@ -82,7 +81,6 @@ function showInputError (formElement, inputElement, errorMessage, { inputErrorCl
 function hideInputError (formElement, inputElement, { inputErrorClass, errorClass }) {
   // Находим элемент ошибки
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  // Остальной код такой же
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
@@ -91,29 +89,30 @@ function hideInputError (formElement, inputElement, { inputErrorClass, errorClas
 
 
 
-
-
-
-
-/*function hasInvalidInput (inputList) {
+function hasInvalidInput (inputList) {
   // проходим по этому массиву методом some
+
   return inputList.some((inputElement) => {
     // Если поле не валидно, колбэк вернёт true
     // Обход массива прекратится и вся функция
     // hasInvalidInput вернёт true
-
+    log(!inputElement.validity.valid);
     return !inputElement.validity.valid;
   })
 };
 
-function toggleButtonState ({ submitButtinSelector, errorClass, }) {
+
+function toggleButtonState (inputList, buttonElement, inactiveButtonClass) {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
-    buttonElement.classList.add(errorClass);
+    buttonElement.classList.add(inactiveButtonClass);
+    buttonElement.setAttribute('disabled', true);
+    //buttonElement.disabled = true;
   } else {
     // иначе сделай кнопку активной
-    buttonElement.classList.remove(errorClass);
+    buttonElement.classList.remove(inactiveButtonClass);
+    buttonElement.removeAttribute("disabled");
   }
-};*/
+};
 

@@ -41,14 +41,14 @@
     <div class="popup popup_contacts">
       <div class="popup__container">
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <form class="form form_contacts" name="contacts" novalidate>
+        <form class="form form_contacts" name="contacts">
           <fieldset class="form__input">
             <input type="text" id="name-input" placeholder="Введите имя" class="form__item form__item_type_name" name="name" required minlength="2" maxlength="40">
             <span class="form__input-error name-input-error"></span>
             <input type="text" id="contact-input" placeholder="Введите профессию" class="form__item form__item_type_contact" name="contact"required minlength="2" maxlength="200">
             <span class="form__input-error contact-input-error"></span>
           </fieldset>
-          <button class="form__btn-save form__btn-save_inactive" type="submit" aria-label="сохранить">Сохранить</button>
+          <button class="form__btn-save" type="submit" aria-label="сохранить">Сохранить</button>
         </form>
         <button class="popup__btn-close button" type="button" aria-label="закрыть"></button>
       </div>
@@ -57,7 +57,7 @@
     <div class="popup popup_newFoto">
       <div class="popup__container">
         <h2 class="popup__heading">Новое место</h2>
-        <form class="form form_newFoto" name="foto" novalidate>
+        <form class="form form_newFoto" name="foto">
           <fieldset class="form__input">
             <input type="text" id="foto-input" placeholder="Название" class="form__item form__item_type_nameFoto" name="nameFoto" required minlength="2" maxlength="30">
             <span class="form__input-error foto-input-error"></span>
