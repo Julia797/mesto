@@ -9,10 +9,6 @@ const validationConfig = {
   inputErrorClass: 'form__item_type_error',
   errorClass: 'form__item-error_active'
 }
-//enableValidation(validationConfig);
-
-
-
 
 //enableValidation находит и переберает все формы на странице:
 function enableValidation ({ formSelector, ...rest }) {
@@ -25,7 +21,6 @@ function enableValidation ({ formSelector, ...rest }) {
     // Для каждой формы вызовем функцию setEventListeners,
     // передав ей элемент формы
       setEventListeners(formElement, rest);
-
   });
 };
 
@@ -39,8 +34,7 @@ function setEventListeners (formElement, { inputSelector, submitButtonSelector, 
   const buttonElement = formElement.querySelector(submitButtonSelector);
   // Вызовем toggleButtonState, чтобы не ждать ввода данных в поля
   toggleButtonState(inputList, buttonElement, inactiveButtonClass);
-
-  // Обойдём все элементы полученной коллекции
+    // Обойдём все элементы полученной коллекции
   inputList.forEach((inputElement) => {
     // каждому полю добавим обработчик события input
     inputElement.addEventListener('input', () => {
@@ -58,28 +52,28 @@ function isValid (formElement, inputElement, rest) {
   if (!inputElement.validity.valid) {
     // showInputError теперь получает параметром форму, в которой
     // находится проверяемое поле, и само это поле
-    showInputError(formElement, inputElement, inputElement.validationMessage, rest);
+    showInputError(formElement, inputElement, inputElement.validationMessage, rest.inputErrorClass, rest.errorClass);
   }
   else {
     // hideInputError теперь получает параметром форму, в которой
     // находится проверяемое поле, и само это поле
-    hideInputError(formElement, inputElement, rest);
+    hideInputError(formElement, inputElement, rest.inputErrorClass, rest.errorClass);
   }
 };
 
 //showInputError — показывает элемент ошибки; показ сообщения об ошибке.
-function showInputError (formElement, inputElement, errorMessage, { inputErrorClass, errorClass }) {
+function showInputError (formElement, inputElement, errorMessage, inputErrorClass, errorClass) {
   // Находим элемент ошибки
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  // Остальной код такой же
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
 };
 
 //hideInputError — скрывает элемент ошибки;показ сообщения об ошибке.
-function hideInputError (formElement, inputElement, { inputErrorClass, errorClass }) {
+function hideInputError (formElement, inputElement, inputErrorClass, errorClass) {
   // Находим элемент ошибки
+
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
@@ -87,16 +81,12 @@ function hideInputError (formElement, inputElement, { inputErrorClass, errorClas
 };
 
 
-
-
 function hasInvalidInput (inputList) {
-  // проходим по этому массиву методом some
-
+  // проходим по массиву методом some
   return inputList.some((inputElement) => {
     // Если поле не валидно, колбэк вернёт true
     // Обход массива прекратится и вся функция
     // hasInvalidInput вернёт true
-    log(!inputElement.validity.valid);
     return !inputElement.validity.valid;
   })
 };
@@ -105,14 +95,21 @@ function hasInvalidInput (inputList) {
 function toggleButtonState (inputList, buttonElement, inactiveButtonClass) {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
-    // сделай кнопку неактивной
+    // кнопка не активная
     buttonElement.classList.add(inactiveButtonClass);
     buttonElement.setAttribute('disabled', true);
-    //buttonElement.disabled = true;
   } else {
-    // иначе сделай кнопку активной
+    // иначе кнопка активная
     buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.removeAttribute("disabled");
   }
 };
 
+
+
+function resetErrorMessage (formElement) {
+  const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
+  inputList.forEach((inputElement) => {
+    hideInputError (formElement, inputElement, validationConfig.inputErrorClass, validationConfig.errorClass);
+  });
+};

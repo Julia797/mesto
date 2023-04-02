@@ -25,8 +25,8 @@ function openPopup(item) {
 
 function closeEsc (evt) {
   if (evt.key === 'Escape') {
-const popupOpen = document.querySelector('.popup_opened');
-    closePopup(popupOpen);
+    const popupOpened = document.querySelector('.popup_opened');
+      closePopup(popupOpened);
   };
 };
 
@@ -34,6 +34,7 @@ btnEdit.addEventListener('click', function () {
   openPopup(popupContacts);
   nameInput.value = profileTitle.textContent;
   infoInput.value = profileSubtitle.textContent;
+  resetErrorMessage (popupContacts);
 });
 
 function handleFormSubmit (evt) {
@@ -47,13 +48,14 @@ formContacts.addEventListener('submit', handleFormSubmit);
 
 btnsClose.forEach(function(item) {
   item.addEventListener('click', function () {
-  const itemPopup = item.closest('.popup');
-  closePopup(itemPopup);
-});
+    const itemPopup = item.closest('.popup');
+    closePopup(itemPopup);
+  });
 });
 
 btnPlus.addEventListener('click', function () {
   openPopup(popupNewFoto);
+  resetErrorMessage (popupNewFoto);
 });
 
 const element = document.querySelector('.element');
