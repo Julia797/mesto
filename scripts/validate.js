@@ -7,7 +7,7 @@ const validationConfig = {
   submitButtonSelector: '.form__btn-save',
   inactiveButtonClass: 'form__btn-save_inactive',
   inputErrorClass: 'form__item_type_error',
-  errorClass: 'form__item-error_active'
+  errorClass: 'form__input-error_active'
 }
 
 //enableValidation находит и переберает все формы на странице:
@@ -58,13 +58,27 @@ function isValid (formElement, inputElement, rest) {
     // hideInputError теперь получает параметром форму, в которой
     // находится проверяемое поле, и само это поле
     hideInputError(formElement, inputElement, rest.inputErrorClass, rest.errorClass);
-  }
+  };
 };
+//функция нахождения элемента ошибки
+function locateErrorElement (formElement, inputElement) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  return errorElement;
+};
+
+
+
+
 
 //showInputError — показывает элемент ошибки; показ сообщения об ошибке.
 function showInputError (formElement, inputElement, errorMessage, inputErrorClass, errorClass) {
-  // Находим элемент ошибки
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  locateErrorElement(formElement, inputElement);
+  log(locateErrorElement(formElement, inputElement));
+
+
+
+
+
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
@@ -73,13 +87,11 @@ function showInputError (formElement, inputElement, errorMessage, inputErrorClas
 //hideInputError — скрывает элемент ошибки;показ сообщения об ошибке.
 function hideInputError (formElement, inputElement, inputErrorClass, errorClass) {
   // Находим элемент ошибки
-
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 };
-
 
 function hasInvalidInput (inputList) {
   // проходим по массиву методом some
@@ -90,7 +102,6 @@ function hasInvalidInput (inputList) {
     return !inputElement.validity.valid;
   })
 };
-
 
 function toggleButtonState (inputList, buttonElement, inactiveButtonClass) {
   // Если есть хотя бы один невалидный инпут
@@ -104,8 +115,6 @@ function toggleButtonState (inputList, buttonElement, inactiveButtonClass) {
     buttonElement.removeAttribute("disabled");
   }
 };
-
-
 
 function resetErrorMessage (formElement) {
   const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));

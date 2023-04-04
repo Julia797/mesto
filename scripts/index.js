@@ -115,19 +115,14 @@ const popupContainers = document.querySelectorAll('.popup__container');
 const popups = document.querySelectorAll('.popup');
 
 
-      popups.forEach(function(item) {
-        item.addEventListener('click', function () {
-        closePopup(item);
-        });
-      });
+popups.forEach(function(item) {
+  item.addEventListener('click', function () {
+  closePopup(item);
+  });
+});
 
-      popupContainers.forEach(function(item) {
-        item.addEventListener('click', function (e) {
-          e.stopPropagation(item);
-        });
-      });
-
-
-
-
-
+popupContainers.forEach(function(item) {
+  item.addEventListener('click', function (e) {
+    e.stopPropagation(item);
+  });
+});

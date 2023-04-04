@@ -1,8 +1,8 @@
 .form__btn-save_inactive {
   border: 1px solid rgba(0, 0, 0, .2);
   background-color: transparent;
-  color: #000;
   cursor: auto;
+  color: rgba(0, 0, 0, .2);
 }
 
 
