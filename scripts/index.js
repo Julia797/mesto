@@ -11,12 +11,12 @@ const nameInput = popupContacts.querySelector('.form__item_type_name');
 const infoInput = popupContacts.querySelector('.form__item_type_contact');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
-
 const popupFotoZoom = popupZoom.querySelector('.popup__fotoZoom');
 const popupTitle = popupZoom.querySelector('.popup__titleZoom');
 const element = document.querySelector('.element');
 const nameNewFoto = popupNewFoto.querySelector('.form__item_type_nameFoto');
 const linkNewFoto = popupNewFoto.querySelector('.form__item_type_newFoto');
+const popups = document.querySelectorAll('.popup');
 
 function closePopup(item) {
   item.classList.remove('popup_opened');
@@ -108,17 +108,13 @@ function handleNewFotoSubmit (evt) {
 
 formNewFoto.addEventListener('submit', handleNewFotoSubmit);
 
-const popupContainers = document.querySelectorAll('.popup__container');
-const popups = document.querySelectorAll('.popup');
-//закрываем по клику на попапе
-popups.forEach(function(item) {
-  item.addEventListener('click', function () {
-    closePopup(item);
-  });
-});
-//останавливаем передачу клика, чтобы форма была не кликабельная
-popupContainers.forEach(function(item) {
-  item.addEventListener('click', function (e) {
-    e.stopPropagation(item);
-  });
+function closePopupOverlay (event) {
+  if (event.target !== event.currentTarget) {
+    return;
+  }
+  closePopup(event.currentTarget);
+};
+
+popups.forEach(function(popup) {
+  popup.addEventListener('click', closePopupOverlay);
 });
