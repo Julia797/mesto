@@ -122,5 +122,5 @@ function closePopupOverlay (event) {
 };
 
 popups.forEach(function(popup) {
-  popup.addEventListener('click', closePopupOverlay);
+  popup.addEventListener('mousedown', closePopupOverlay);
 });
