@@ -65,6 +65,7 @@ btnsClose.forEach(function(item) {
 
 btnPlus.addEventListener('click', function () {
   openPopup(popupNewFoto);
+  formNewFoto.reset();
   resetErrorMessage(popupNewFoto);
   toggleButtonState(inputListNewFoto, btnSubmitNewFoto, validationConfig.inactiveButtonClass);
 });
