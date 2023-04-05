@@ -39,7 +39,7 @@ btnEdit.addEventListener('click', function () {
   openPopup(popupContacts);
   nameInput.value = profileTitle.textContent;
   infoInput.value = profileSubtitle.textContent;
-  resetErrorMessage (popupContacts);
+  resetErrorMessage(popupContacts);
 });
 
 function handleFormSubmit (evt) {
@@ -60,7 +60,7 @@ btnsClose.forEach(function(item) {
 
 btnPlus.addEventListener('click', function () {
   openPopup(popupNewFoto);
-  resetErrorMessage (popupNewFoto);
+  resetErrorMessage(popupNewFoto);
 });
 
 const deleteCard = function(evt) {

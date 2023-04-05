@@ -99,8 +99,6 @@ function toggleButtonState (inputList, buttonElement, inactiveButtonClass) {
 function resetErrorMessage (formElement) {
   const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
   inputList.forEach((inputElement) => {
-    if (!inputElement.validity.valid) {
-      hideInputError (formElement, inputElement, validationConfig.inputErrorClass, validationConfig.errorClass);
-    };
+    hideInputError(formElement, inputElement, validationConfig.inputErrorClass, validationConfig.errorClass);
   });
 };
