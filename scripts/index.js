@@ -12,6 +12,11 @@ const infoInput = popupContacts.querySelector('.form__item_type_contact');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
+const popupFotoZoom = popupZoom.querySelector('.popup__fotoZoom');
+const popupTitle = popupZoom.querySelector('.popup__titleZoom');
+const element = document.querySelector('.element');
+const nameNewFoto = popupNewFoto.querySelector('.form__item_type_nameFoto');
+const linkNewFoto = popupNewFoto.querySelector('.form__item_type_newFoto');
 
 function closePopup(item) {
   item.classList.remove('popup_opened');
@@ -26,7 +31,7 @@ function openPopup(item) {
 function closeEsc (evt) {
   if (evt.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened');
-      closePopup(popupOpened);
+    closePopup(popupOpened);
   };
 };
 
@@ -58,8 +63,6 @@ btnPlus.addEventListener('click', function () {
   resetErrorMessage (popupNewFoto);
 });
 
-const element = document.querySelector('.element');
-
 const deleteCard = function(evt) {
   const listItem = evt.target.closest('.element__item');
   listItem.remove();
@@ -68,9 +71,6 @@ const deleteCard = function(evt) {
 const plusLike = function(evt) {
   evt.target.classList.toggle('btn-like_active');
 };
-
-const popupFotoZoom = popupZoom.querySelector('.popup__fotoZoom');
-const popupTitle = popupZoom.querySelector('.popup__titleZoom');
 
 const zoomFoto = function(evt) {
   popupFotoZoom.src = evt.target.src;
@@ -99,28 +99,24 @@ initialCards.forEach(function(item) {
   element.append(createCard(item.name, item.link));
 });
 
-const nameNewFoto = popupNewFoto.querySelector('.form__item_type_nameFoto');
-const linkNewFoto = popupNewFoto.querySelector('.form__item_type_newFoto');
-
 function handleNewFotoSubmit (evt) {
   evt.preventDefault();
   element.prepend(createCard(nameNewFoto.value, linkNewFoto.value));
   evt.target.reset();
-   closePopup(popupNewFoto);
+  closePopup(popupNewFoto);
 };
 
 formNewFoto.addEventListener('submit', handleNewFotoSubmit);
 
 const popupContainers = document.querySelectorAll('.popup__container');
 const popups = document.querySelectorAll('.popup');
-
-
+//закрываем по клику на попапе
 popups.forEach(function(item) {
   item.addEventListener('click', function () {
-  closePopup(item);
+    closePopup(item);
   });
 });
-
+//останавливаем передачу клика, чтобы форма была не кликабельная
 popupContainers.forEach(function(item) {
   item.addEventListener('click', function (e) {
     e.stopPropagation(item);

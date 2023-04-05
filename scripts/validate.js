@@ -1,6 +1,3 @@
-
-const log = console.log;
-
 const validationConfig = {
   formSelector: '.form',
   inputSelector: '.form__item',
@@ -8,19 +5,15 @@ const validationConfig = {
   inactiveButtonClass: 'form__btn-save_inactive',
   inputErrorClass: 'form__item_type_error',
   errorClass: 'form__input-error_active'
-}
+};
 
-//enableValidation находит и переберает все формы на странице:
+//enableValidation находит и перебирает все формы на странице:
 function enableValidation ({ formSelector, ...rest }) {
   // Найдём все формы с указанным классом в DOM,
   // сделаем из них массив методом Array.from
   const formList = Array.from(document.querySelectorAll(formSelector));
-
-  // Переберём полученную коллекцию
   formList.forEach((formElement) => {
-    // Для каждой формы вызовем функцию setEventListeners,
-    // передав ей элемент формы
-      setEventListeners(formElement, rest);
+    setEventListeners(formElement, rest);
   });
 };
 
@@ -34,18 +27,15 @@ function setEventListeners (formElement, { inputSelector, submitButtonSelector, 
   const buttonElement = formElement.querySelector(submitButtonSelector);
   // Вызовем toggleButtonState, чтобы не ждать ввода данных в поля
   toggleButtonState(inputList, buttonElement, inactiveButtonClass);
-    // Обойдём все элементы полученной коллекции
   inputList.forEach((inputElement) => {
     // каждому полю добавим обработчик события input
     inputElement.addEventListener('input', () => {
       // Внутри колбэка вызовем isValid,
-      // передав ей форму и проверяемый элемент
       isValid(formElement, inputElement, rest);
       toggleButtonState(inputList, buttonElement, inactiveButtonClass);
     });
   });
 };
-
 
 //isValid — проверяет валидность поля, внутри вызывает showInputError или hideInputError
 function isValid (formElement, inputElement, rest) {
@@ -60,25 +50,16 @@ function isValid (formElement, inputElement, rest) {
     hideInputError(formElement, inputElement, rest.inputErrorClass, rest.errorClass);
   };
 };
+
 //функция нахождения элемента ошибки
 function locateErrorElement (formElement, inputElement) {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  return errorElement;
+  errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+ return errorElement;
 };
-
-
-
-
 
 //showInputError — показывает элемент ошибки; показ сообщения об ошибке.
 function showInputError (formElement, inputElement, errorMessage, inputErrorClass, errorClass) {
-  locateErrorElement(formElement, inputElement);
-  log(locateErrorElement(formElement, inputElement));
-
-
-
-
-
+  const errorElement = locateErrorElement(formElement, inputElement);
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
@@ -86,8 +67,7 @@ function showInputError (formElement, inputElement, errorMessage, inputErrorClas
 
 //hideInputError — скрывает элемент ошибки;показ сообщения об ошибке.
 function hideInputError (formElement, inputElement, inputErrorClass, errorClass) {
-  // Находим элемент ошибки
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  const errorElement = locateErrorElement(formElement, inputElement);
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
@@ -100,7 +80,7 @@ function hasInvalidInput (inputList) {
     // Обход массива прекратится и вся функция
     // hasInvalidInput вернёт true
     return !inputElement.validity.valid;
-  })
+  });
 };
 
 function toggleButtonState (inputList, buttonElement, inactiveButtonClass) {
@@ -113,12 +93,14 @@ function toggleButtonState (inputList, buttonElement, inactiveButtonClass) {
     // иначе кнопка активная
     buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.removeAttribute("disabled");
-  }
+  };
 };
 
 function resetErrorMessage (formElement) {
   const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
   inputList.forEach((inputElement) => {
-    hideInputError (formElement, inputElement, validationConfig.inputErrorClass, validationConfig.errorClass);
+    if (!inputElement.validity.valid) {
+      hideInputError (formElement, inputElement, validationConfig.inputErrorClass, validationConfig.errorClass);
+    };
   });
 };
