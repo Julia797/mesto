@@ -17,6 +17,10 @@ const element = document.querySelector('.element');
 const nameNewFoto = popupNewFoto.querySelector('.form__item_type_nameFoto');
 const linkNewFoto = popupNewFoto.querySelector('.form__item_type_newFoto');
 const popups = document.querySelectorAll('.popup');
+const inputListContacts = Array.from(popupContacts.querySelectorAll('.form__item'));
+const btnSubmitContacts = popupContacts.querySelector('.form__btn-save');
+const inputListNewFoto = Array.from(popupNewFoto.querySelectorAll('.form__item'));
+const btnSubmitNewFoto = popupNewFoto.querySelector('.form__btn-save');
 
 function closePopup(item) {
   item.classList.remove('popup_opened');
@@ -40,6 +44,7 @@ btnEdit.addEventListener('click', function () {
   nameInput.value = profileTitle.textContent;
   infoInput.value = profileSubtitle.textContent;
   resetErrorMessage(popupContacts);
+  toggleButtonState(inputListContacts, btnSubmitContacts, validationConfig.inactiveButtonClass);
 });
 
 function handleFormSubmit (evt) {
@@ -61,6 +66,7 @@ btnsClose.forEach(function(item) {
 btnPlus.addEventListener('click', function () {
   openPopup(popupNewFoto);
   resetErrorMessage(popupNewFoto);
+  toggleButtonState(inputListNewFoto, btnSubmitNewFoto, validationConfig.inactiveButtonClass);
 });
 
 const deleteCard = function(evt) {
