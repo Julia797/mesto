@@ -41,10 +41,10 @@ function closeEsc (evt) {
 
 btnEdit.addEventListener('click', function () {
   openPopup(popupContacts);
-  nameInput.value = profileTitle.textContent;
-  infoInput.value = profileSubtitle.textContent;
   resetErrorMessage(popupContacts);
   toggleButtonState(inputListContacts, btnSubmitContacts, validationConfig.inactiveButtonClass);
+  nameInput.value = profileTitle.textContent;
+  infoInput.value = profileSubtitle.textContent;
 });
 
 function handleFormSubmit (evt) {
@@ -86,25 +86,91 @@ const zoomFoto = function(evt) {
   openPopup(popupZoom);
 }
 
-function createCard(title, link) {
+/*function createCard(title, link) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardItem = cardTemplate.cloneNode(true);
+
   const elementFoto = cardItem.querySelector('.element__foto');
   const elementTitle = cardItem.querySelector('.element__title');
+
   elementTitle.textContent = title;
   elementFoto.src = link;
   elementFoto.alt = title;
+
   const btnDelete = cardItem.querySelector('.btn-delete');
   btnDelete.addEventListener('click', deleteCard);
   const btnLike = cardItem.querySelector('.btn-like');
   btnLike.addEventListener('click', plusLike);
   elementFoto.addEventListener('click', zoomFoto);
   return cardItem;
-};
+};*/
 
-initialCards.forEach(function(item) {
-  element.append(createCard(item.name, item.link));
+class Card {
+  constructor(title, link) {
+      this._title = title;
+      this._link = link;
+
+  }
+_getTemplate() {
+// забираем разметку из HTML и клонируем элемент
+  const cardTemplate = document.querySelector('#card-template').content;
+  const cardItem = cardTemplate.cloneNode(true);
+
+  // вернём DOM-элемент карточки
+  return cardItem;
+}
+
+/*const cardElement = document
+.querySelector('.horizontal-card')
+.content
+.querySelector('.card')
+.cloneNode(true);
+
+// вернём DOM-элемент карточки
+return cardElement;
+}
+}*/
+
+generateCard() {
+    // Запишем разметку в приватное поле _element.
+    // Так у других элементов появится доступ к ней.
+  this._element = this._getTemplate();
+
+    // Добавим данные
+    this._element.querySelector('.element__foto').src = this._link;
+    this._element.querySelector('.element__title').textContent = this._title;
+    this._element.querySelector('.element__foto').alt = this._title;
+
+    //elementTitle.textContent = title;
+    //elementFoto.src = link;
+    //elementFoto.alt = title;
+
+  //this._element.querySelector('.card__image').style.backgroundImage = `url(${this._image})`;
+  //this._element.querySelector('.card__title').textContent = this._title;
+  //this._element.querySelector('.card__info').textContent = this._description;
+
+    // Вернём элемент наружу
+    return this._element;
+  }
+}
+
+initialCards.forEach((item) => {
+  // Создадим экземпляр карточки
+  const card = new Card(item.name, item.link);
+  // Создаём карточку и возвращаем наружу
+  const cardElement = card.generateCard();
+
+  // Добавляем в DOM
+  document.querySelector('.element').append(cardElement);
 });
+
+
+/*initialCards.forEach(function(item) {
+  element.append(createCard(item.name, item.link));
+});*/
+
+
+
 
 function handleNewFotoSubmit (evt) {
   evt.preventDefault();
