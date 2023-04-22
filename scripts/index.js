@@ -70,21 +70,28 @@ btnPlus.addEventListener('click', function () {
   toggleButtonState(inputListNewFoto, btnSubmitNewFoto, validationConfig.inactiveButtonClass);
 });
 
-const deleteCard = function(evt) {
+/*const deleteCard = function(evt) {
   const listItem = evt.target.closest('.element__item');
   listItem.remove();
 };
 
-const plusLike = function(evt) {
+/*const plusLike = function(evt) {
   evt.target.classList.toggle('btn-like_active');
-};
+};*/
 
-const zoomFoto = function(evt) {
+  const openZoomFoto = function(title, link) {
+  popupFotoZoom.src = link;
+  popupTitle.textContent = title;
+  popupFotoZoom.alt = title;
+  openPopup(popupZoom);
+}
+/*const zoomFoto = function(evt) {
   popupFotoZoom.src = evt.target.src;
   popupTitle.textContent = evt.target.alt;
   popupFotoZoom.alt = evt.target.alt;
   openPopup(popupZoom);
-}
+}*/
+
 
 /*function createCard(title, link) {
   const cardTemplate = document.querySelector('#card-template').content;
@@ -101,65 +108,69 @@ const zoomFoto = function(evt) {
   btnDelete.addEventListener('click', deleteCard);
   const btnLike = cardItem.querySelector('.btn-like');
   btnLike.addEventListener('click', plusLike);
-  elementFoto.addEventListener('click', zoomFoto);
+  elementFoto.addEventListener('click', zoomFoto);  теперь openZoomFoto;
   return cardItem;
 };*/
+const selectorTemplate = '#card-template';
 
 class Card {
-  constructor(title, link) {
+  constructor(title, link, selectorTemplate, openZoomFoto) {
       this._title = title;
       this._link = link;
-
-  }
+      this._selectorTemplate = selectorTemplate;
+      this._openZoomFoto = openZoomFoto;
+    }
 _getTemplate() {
 // забираем разметку из HTML и клонируем элемент
-  const cardTemplate = document.querySelector('#card-template').content;
-  const cardItem = cardTemplate.cloneNode(true);
-
+  const cardTemplate = document.querySelector(this._selectorTemplate).content;
+  //const cardItem = cardTemplate.querySelector('.element__item').cloneNode(true);
+  const cardItem = cardTemplate.querySelector('.element__item').cloneNode(true);
   // вернём DOM-элемент карточки
   return cardItem;
 }
 
-/*const cardElement = document
-.querySelector('.horizontal-card')
-.content
-.querySelector('.card')
-.cloneNode(true);
+_handlePlusLike = () => {
+  this._btnLike.classList.toggle('btn-like_active');
+  console.log(this._btnLike);
+};
 
-// вернём DOM-элемент карточки
-return cardElement;
+_handleDeleteCard = () => {
+  this._element.remove();
+};
+
+_handleOpenZoomFoto = () =>  {
+  this._openZoomFoto(title, link);
 }
-}*/
+
+_setEventListener() {
+  this._btnLike.addEventListener('click', this._handlePlusLike);
+  this._btnDelete.addEventListener('click', this._handleDeleteCard);
+  this._elementFoto.addEventListener('click', this._handleOpenZoomFoto);
+}
 
 generateCard() {
-    // Запишем разметку в приватное поле _element.
-    // Так у других элементов появится доступ к ней.
+  // Запишем разметку в приватное поле _element.
+ // Так у других элементов появится доступ к ней.
   this._element = this._getTemplate();
+  // Добавим данные
+  this._element.querySelector('.element__foto').src = this._link;
+  this._element.querySelector('.element__title').textContent = this._title;
+  this._element.querySelector('.element__foto').alt = this._title;
+  this._btnDelete = this._element.querySelector('.btn-delete');
+  this._btnLike = this._element.querySelector('.btn-like');
+  this._elementFoto = this._element.querySelector('.element__foto');
+  this._setEventListener();
 
-    // Добавим данные
-    this._element.querySelector('.element__foto').src = this._link;
-    this._element.querySelector('.element__title').textContent = this._title;
-    this._element.querySelector('.element__foto').alt = this._title;
-
-    //elementTitle.textContent = title;
-    //elementFoto.src = link;
-    //elementFoto.alt = title;
-
-  //this._element.querySelector('.card__image').style.backgroundImage = `url(${this._image})`;
-  //this._element.querySelector('.card__title').textContent = this._title;
-  //this._element.querySelector('.card__info').textContent = this._description;
-
-    // Вернём элемент наружу
-    return this._element;
+  // Вернём элемент наружу
+  return this._element;
   }
 }
 
 initialCards.forEach((item) => {
   // Создадим экземпляр карточки
-  const card = new Card(item.name, item.link);
+  const card = new Card(item.name, item.link, selectorTemplate, openZoomFoto);
   // Создаём карточку и возвращаем наружу
   const cardElement = card.generateCard();
-
   // Добавляем в DOM
   document.querySelector('.element').append(cardElement);
 });
@@ -169,15 +180,22 @@ initialCards.forEach((item) => {
   element.append(createCard(item.name, item.link));
 });*/
 
-
-
-
 function handleNewFotoSubmit (evt) {
+  evt.preventDefault();
+  const card = new Card(nameNewFoto.value, linkNewFoto.value, selectorTemplate, openZoomFoto);
+  const cardElement = card.generateCard();
+  document.querySelector('.element').prepend(cardElement);
+  //evt.target.reset();
+  closePopup(popupNewFoto);
+}
+
+
+/*function handleNewFotoSubmit (evt) {
   evt.preventDefault();
   element.prepend(createCard(nameNewFoto.value, linkNewFoto.value));
   evt.target.reset();
   closePopup(popupNewFoto);
-};
+};*/
 
 formNewFoto.addEventListener('submit', handleNewFotoSubmit);
 
