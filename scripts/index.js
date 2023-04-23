@@ -5,8 +5,8 @@ const popupZoom = document.querySelector('.popup_zoom');
 const btnEdit = document.querySelector('.profile__btn-edit');
 const btnPlus = document.querySelector('.profile__btn-plus');
 const btnsClose = document.querySelectorAll('.popup__btn-close');
-const formContacts = document.querySelector('.form_contacts');
-const formNewFoto = document.querySelector('.form_newFoto');
+//const formContacts = document.querySelector('.form_contacts');
+//const formNewFoto = document.querySelector('.form_newFoto');
 const nameInput = popupContacts.querySelector('.form__item_type_name');
 const infoInput = popupContacts.querySelector('.form__item_type_contact');
 const profileTitle = document.querySelector('.profile__title');
@@ -41,8 +41,8 @@ function closeEsc (evt) {
 
 btnEdit.addEventListener('click', function () {
   openPopup(popupContacts);
-  resetErrorMessage(popupContacts);
-  toggleButtonState(inputListContacts, btnSubmitContacts, validationConfig.inactiveButtonClass);
+  //resetErrorMessage(popupContacts);
+  //toggleButtonState(inputListContacts, btnSubmitContacts, validationConfig.inactiveButtonClass);
   nameInput.value = profileTitle.textContent;
   infoInput.value = profileSubtitle.textContent;
 });
@@ -66,18 +66,9 @@ btnsClose.forEach(function(item) {
 btnPlus.addEventListener('click', function () {
   openPopup(popupNewFoto);
   formNewFoto.reset();
-  resetErrorMessage(popupNewFoto);
-  toggleButtonState(inputListNewFoto, btnSubmitNewFoto, validationConfig.inactiveButtonClass);
+  //resetErrorMessage(popupNewFoto);
+  //toggleButtonState(inputListNewFoto, btnSubmitNewFoto, validationConfig.inactiveButtonClass);
 });
-
-/*const deleteCard = function(evt) {
-  const listItem = evt.target.closest('.element__item');
-  listItem.remove();
-};
-
-/*const plusLike = function(evt) {
-  evt.target.classList.toggle('btn-like_active');
-};*/
 
   const openZoomFoto = function(title, link) {
   popupFotoZoom.src = link;
@@ -85,32 +76,7 @@ btnPlus.addEventListener('click', function () {
   popupFotoZoom.alt = title;
   openPopup(popupZoom);
 }
-/*const zoomFoto = function(evt) {
-  popupFotoZoom.src = evt.target.src;
-  popupTitle.textContent = evt.target.alt;
-  popupFotoZoom.alt = evt.target.alt;
-  openPopup(popupZoom);
-}*/
 
-
-/*function createCard(title, link) {
-  const cardTemplate = document.querySelector('#card-template').content;
-  const cardItem = cardTemplate.cloneNode(true);
-
-  const elementFoto = cardItem.querySelector('.element__foto');
-  const elementTitle = cardItem.querySelector('.element__title');
-
-  elementTitle.textContent = title;
-  elementFoto.src = link;
-  elementFoto.alt = title;
-
-  const btnDelete = cardItem.querySelector('.btn-delete');
-  btnDelete.addEventListener('click', deleteCard);
-  const btnLike = cardItem.querySelector('.btn-like');
-  btnLike.addEventListener('click', plusLike);
-  elementFoto.addEventListener('click', zoomFoto);  теперь openZoomFoto;
-  return cardItem;
-};*/
 const selectorTemplate = '#card-template';
 
 class Card {
@@ -131,7 +97,6 @@ _getTemplate() {
 
 _handlePlusLike = () => {
   this._btnLike.classList.toggle('btn-like_active');
-  console.log(this._btnLike);
 };
 
 _handleDeleteCard = () => {
@@ -139,7 +104,7 @@ _handleDeleteCard = () => {
 };
 
 _handleOpenZoomFoto = () =>  {
-  this._openZoomFoto(title, link);
+  this._openZoomFoto(this._title, this._link);
 }
 
 _setEventListener() {
@@ -160,7 +125,6 @@ generateCard() {
   this._btnLike = this._element.querySelector('.btn-like');
   this._elementFoto = this._element.querySelector('.element__foto');
   this._setEventListener();
-
   // Вернём элемент наружу
   return this._element;
   }
@@ -175,7 +139,6 @@ initialCards.forEach((item) => {
   document.querySelector('.element').append(cardElement);
 });
 
-
 /*initialCards.forEach(function(item) {
   element.append(createCard(item.name, item.link));
 });*/
@@ -188,7 +151,6 @@ function handleNewFotoSubmit (evt) {
   //evt.target.reset();
   closePopup(popupNewFoto);
 }
-
 
 /*function handleNewFotoSubmit (evt) {
   evt.preventDefault();
