@@ -5,8 +5,6 @@ const popupZoom = document.querySelector('.popup_zoom');
 const btnEdit = document.querySelector('.profile__btn-edit');
 const btnPlus = document.querySelector('.profile__btn-plus');
 const btnsClose = document.querySelectorAll('.popup__btn-close');
-//const formContacts = document.querySelector('.form_contacts');
-//const formNewFoto = document.querySelector('.form_newFoto');
 const nameInput = popupContacts.querySelector('.form__item_type_name');
 const infoInput = popupContacts.querySelector('.form__item_type_contact');
 const profileTitle = document.querySelector('.profile__title');
@@ -40,11 +38,11 @@ function closeEsc (evt) {
 };
 
 btnEdit.addEventListener('click', function () {
-  openPopup(popupContacts);
-  //resetErrorMessage(popupContacts);
-  //toggleButtonState(inputListContacts, btnSubmitContacts, validationConfig.inactiveButtonClass);
+  formContacts.reset();
+  FormContactsValidator.resetErrorMessage();
   nameInput.value = profileTitle.textContent;
   infoInput.value = profileSubtitle.textContent;
+  openPopup(popupContacts);
 });
 
 function handleFormSubmit (evt) {
@@ -64,10 +62,9 @@ btnsClose.forEach(function(item) {
 });
 
 btnPlus.addEventListener('click', function () {
-  openPopup(popupNewFoto);
   formNewFoto.reset();
-  //resetErrorMessage(popupNewFoto);
-  //toggleButtonState(inputListNewFoto, btnSubmitNewFoto, validationConfig.inactiveButtonClass);
+  FormNewFotoValidator.resetErrorMessage();
+  openPopup(popupNewFoto);
 });
 
   const openZoomFoto = function(title, link) {
