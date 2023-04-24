@@ -1,13 +1,4 @@
-const validationConfig = {
-  formSelector: '.form',
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__btn-save',
-  inactiveButtonClass: 'form__btn-save_inactive',
-  inputErrorClass: 'form__item_type_error',
-  errorClass: 'form__input-error_active'
-};
-
-/*export default*/ class FormValidator {
+export default class FormValidator {
   constructor(validationConfig, formElement) {
     this._formSelector = validationConfig.formSelector;
     this._inputSelector = validationConfig.inputSelector;
@@ -38,7 +29,6 @@ const validationConfig = {
 
   //isValid — проверяет валидность поля, внутри вызывает showInputError или hideInputError
   _isValid () {
-    console.log(this._inputElement);
     if (!this._inputElement.validity.valid) {
       this._showInputError();
     }
@@ -97,7 +87,6 @@ const validationConfig = {
   resetErrorMessage () {
     this._inputList.forEach((inputElement) => {
       this._inputElement = inputElement;
-      console.log(this);
       this._errorElement = this._locateErrorElement();
       if (!inputElement.validity.valid) {
         this._hideInputError();
@@ -107,12 +96,6 @@ const validationConfig = {
   };
 };
 
-const formContacts = document.querySelector('.form_contacts');
-const formNewFoto = document.querySelector('.form_newFoto');
-const FormContactsValidator = new FormValidator(validationConfig, formContacts);
-const FormNewFotoValidator = new FormValidator(validationConfig, formNewFoto);
-FormContactsValidator.enableValidation();
-FormNewFotoValidator.enableValidation();
 
 
 

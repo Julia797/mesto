@@ -1,3 +1,6 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 const popup = document.querySelector('.popup');
 const popupContacts = document.querySelector('.popup_contacts');
 const popupNewFoto = document.querySelector('.popup_newFoto');
@@ -19,6 +22,17 @@ const inputListContacts = Array.from(popupContacts.querySelectorAll('.form__item
 const btnSubmitContacts = popupContacts.querySelector('.form__btn-save');
 const inputListNewFoto = Array.from(popupNewFoto.querySelectorAll('.form__item'));
 const btnSubmitNewFoto = popupNewFoto.querySelector('.form__btn-save');
+const formContacts = document.querySelector('.form_contacts');
+const formNewFoto = document.querySelector('.form_newFoto');
+
+const validationConfig = {
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__btn-save',
+  inactiveButtonClass: 'form__btn-save_inactive',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__input-error_active'
+};
 
 function closePopup(item) {
   item.classList.remove('popup_opened');
@@ -76,57 +90,6 @@ btnPlus.addEventListener('click', function () {
 
 const selectorTemplate = '#card-template';
 
-class Card {
-  constructor(title, link, selectorTemplate, openZoomFoto) {
-      this._title = title;
-      this._link = link;
-      this._selectorTemplate = selectorTemplate;
-      this._openZoomFoto = openZoomFoto;
-    }
-_getTemplate() {
-// забираем разметку из HTML и клонируем элемент
-  const cardTemplate = document.querySelector(this._selectorTemplate).content;
-  //const cardItem = cardTemplate.querySelector('.element__item').cloneNode(true);
-  const cardItem = cardTemplate.querySelector('.element__item').cloneNode(true);
-  // вернём DOM-элемент карточки
-  return cardItem;
-}
-
-_handlePlusLike = () => {
-  this._btnLike.classList.toggle('btn-like_active');
-};
-
-_handleDeleteCard = () => {
-  this._element.remove();
-};
-
-_handleOpenZoomFoto = () =>  {
-  this._openZoomFoto(this._title, this._link);
-}
-
-_setEventListener() {
-  this._btnLike.addEventListener('click', this._handlePlusLike);
-  this._btnDelete.addEventListener('click', this._handleDeleteCard);
-  this._elementFoto.addEventListener('click', this._handleOpenZoomFoto);
-}
-
-generateCard() {
-  // Запишем разметку в приватное поле _element.
- // Так у других элементов появится доступ к ней.
-  this._element = this._getTemplate();
-  // Добавим данные
-  this._element.querySelector('.element__foto').src = this._link;
-  this._element.querySelector('.element__title').textContent = this._title;
-  this._element.querySelector('.element__foto').alt = this._title;
-  this._btnDelete = this._element.querySelector('.btn-delete');
-  this._btnLike = this._element.querySelector('.btn-like');
-  this._elementFoto = this._element.querySelector('.element__foto');
-  this._setEventListener();
-  // Вернём элемент наружу
-  return this._element;
-  }
-}
-
 initialCards.forEach((item) => {
   // Создадим экземпляр карточки
   const card = new Card(item.name, item.link, selectorTemplate, openZoomFoto);
@@ -136,25 +99,18 @@ initialCards.forEach((item) => {
   document.querySelector('.element').append(cardElement);
 });
 
-/*initialCards.forEach(function(item) {
-  element.append(createCard(item.name, item.link));
-});*/
+const FormContactsValidator = new FormValidator(validationConfig, formContacts);
+const FormNewFotoValidator = new FormValidator(validationConfig, formNewFoto);
+FormContactsValidator.enableValidation();
+FormNewFotoValidator.enableValidation();
 
 function handleNewFotoSubmit (evt) {
   evt.preventDefault();
   const card = new Card(nameNewFoto.value, linkNewFoto.value, selectorTemplate, openZoomFoto);
   const cardElement = card.generateCard();
   document.querySelector('.element').prepend(cardElement);
-  //evt.target.reset();
   closePopup(popupNewFoto);
-}
-
-/*function handleNewFotoSubmit (evt) {
-  evt.preventDefault();
-  element.prepend(createCard(nameNewFoto.value, linkNewFoto.value));
-  evt.target.reset();
-  closePopup(popupNewFoto);
-};*/
+};
 
 formNewFoto.addEventListener('submit', handleNewFotoSubmit);
 
