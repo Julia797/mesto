@@ -86,18 +86,23 @@ btnPlus.addEventListener('click', function () {
   popupTitle.textContent = title;
   popupFotoZoom.alt = title;
   openPopup(popupZoom);
-}
+};
 
 const selectorTemplate = '#card-template';
 const container = document.querySelector('.element');
 
-initialCards.forEach((item) => {
-  // Создадим экземпляр карточки
-  const card = new Card(item.name, item.link, selectorTemplate, openZoomFoto);
-  // Создаём карточку и возвращаем наружу
+function createCard (title, link,) {
+  const card = new Card(title, link, selectorTemplate, openZoomFoto);
   const cardElement = card.generateCard();
-  // Добавляем в DOM
+  return cardElement;
+};
+
+function addCard (container, cardElement) {
   container.append(cardElement);
+};
+
+initialCards.forEach((item) => {
+  addCard(container, createCard(item.name, item.link));
 });
 
 const formContactsValidator = new FormValidator(validationConfig, formContacts);
@@ -107,9 +112,7 @@ formNewFotoValidator.enableValidation();
 
 function handleNewFotoSubmit (evt) {
   evt.preventDefault();
-  const card = new Card(nameNewFoto.value, linkNewFoto.value, selectorTemplate, openZoomFoto);
-  const cardElement = card.generateCard();
-  document.querySelector('.element').prepend(cardElement);
+  container.prepend(createCard(nameNewFoto.value, linkNewFoto.value));
   closePopup(popupNewFoto);
 };
 
