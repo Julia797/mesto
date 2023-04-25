@@ -53,8 +53,7 @@ function closeEsc (evt) {
 };
 
 btnEdit.addEventListener('click', function () {
-  formContacts.reset();
-  FormContactsValidator.resetErrorMessage();
+  formContactsValidator.resetErrorMessage();
   nameInput.value = profileTitle.textContent;
   infoInput.value = profileSubtitle.textContent;
   openPopup(popupContacts);
@@ -78,7 +77,7 @@ btnsClose.forEach(function(item) {
 
 btnPlus.addEventListener('click', function () {
   formNewFoto.reset();
-  FormNewFotoValidator.resetErrorMessage();
+  formNewFotoValidator.resetErrorMessage();
   openPopup(popupNewFoto);
 });
 
@@ -90,6 +89,7 @@ btnPlus.addEventListener('click', function () {
 }
 
 const selectorTemplate = '#card-template';
+const container = document.querySelector('.element');
 
 initialCards.forEach((item) => {
   // Создадим экземпляр карточки
@@ -97,13 +97,13 @@ initialCards.forEach((item) => {
   // Создаём карточку и возвращаем наружу
   const cardElement = card.generateCard();
   // Добавляем в DOM
-  document.querySelector('.element').append(cardElement);
+  container.append(cardElement);
 });
 
-const FormContactsValidator = new FormValidator(validationConfig, formContacts);
-const FormNewFotoValidator = new FormValidator(validationConfig, formNewFoto);
-FormContactsValidator.enableValidation();
-FormNewFotoValidator.enableValidation();
+const formContactsValidator = new FormValidator(validationConfig, formContacts);
+const formNewFotoValidator = new FormValidator(validationConfig, formNewFoto);
+formContactsValidator.enableValidation();
+formNewFotoValidator.enableValidation();
 
 function handleNewFotoSubmit (evt) {
   evt.preventDefault();

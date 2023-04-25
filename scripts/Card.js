@@ -1,4 +1,3 @@
-
 export default class Card {
   constructor(title, link, selectorTemplate, openZoomFoto) {
       this._title = title;
