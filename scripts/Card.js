@@ -4,14 +4,15 @@ export default class Card {
       this._link = link;
       this._selectorTemplate = selectorTemplate;
       this._openZoomFoto = openZoomFoto;
-    }
+    };
+
 _getTemplate() {
 // забираем разметку из HTML и клонируем элемент
   const cardTemplate = document.querySelector(this._selectorTemplate).content;
   const cardItem = cardTemplate.querySelector('.element__item').cloneNode(true);
   // вернём DOM-элемент карточки
   return cardItem;
-}
+};
 
 _handlePlusLike = () => {
   this._btnLike.classList.toggle('btn-like_active');
@@ -24,13 +25,13 @@ _handleDeleteCard = () => {
 
 _handleOpenZoomFoto = () =>  {
   this._openZoomFoto(this._title, this._link);
-}
+};
 
 _setEventListener() {
   this._btnLike.addEventListener('click', this._handlePlusLike);
   this._btnDelete.addEventListener('click', this._handleDeleteCard);
   this._elementFoto.addEventListener('click', this._handleOpenZoomFoto);
-}
+};
 
 generateCard() {
   this._element = this._getTemplate();

@@ -89,26 +89,21 @@ btnPlus.addEventListener('click', function () {
 };
 
 const selectorTemplate = '#card-template';
-const container = document.querySelector('.element');
+//const container = document.querySelector('.element');
 
-function createCard (title, link,) {
+/*function createCard (title, link,) {
   const card = new Card(title, link, selectorTemplate, openZoomFoto);
   const cardElement = card.generateCard();
   return cardElement;
-};
+};*/
 
-function addCard (container, cardElement) {
+/*function addCard (container, cardElement) {
   container.append(cardElement);
 };
 
 initialCards.forEach((item) => {
   addCard(container, createCard(item.name, item.link));
-});
-
-const formContactsValidator = new FormValidator(validationConfig, formContacts);
-const formNewFotoValidator = new FormValidator(validationConfig, formNewFoto);
-formContactsValidator.enableValidation();
-formNewFotoValidator.enableValidation();
+});*/
 
 function handleNewFotoSubmit (evt) {
   evt.preventDefault();
@@ -117,6 +112,72 @@ function handleNewFotoSubmit (evt) {
 };
 
 formNewFoto.addEventListener('submit', handleNewFotoSubmit);
+
+//renderer — отвечает за создание и отрисовку данных на странице
+/*function renderCard (item) {
+ addCard(container, createCard(item.name, item.link))
+};*/
+
+
+class Section {
+  constructor({ items, renderer }, selector) {
+    this._items = items;
+    this._renderer = renderer;
+    this._container = document.querySelector(selector);
+    }
+
+  renderItems() {
+    this._items.forEach((item) => {
+      this.addItem(this._renderer(item.name, item.link));
+      console.log(item);
+    });
+  };
+
+  addItem(itemHtml) {
+    this._container.prepend(itemHtml);
+  }
+}
+/*function createCard (title, link,) {
+  const card = new Card(title, link, selectorTemplate, openZoomFoto);
+  const cardElement = card.generateCard();
+  return cardElement;
+};*/
+
+/*function addCard (container, cardElement) {
+  container.append(cardElement);
+};
+
+initialCards.forEach((item) => {
+  addCard(container, createCard(item.name, item.link));
+});*/
+/*function renderCard(cardData) {
+  const cardElement = createCard(cardData);
+  return section.addItem(cardElement);
+
+};*/
+
+function renderCard (title, link) {
+  const card = new Card(title, link, selectorTemplate, openZoomFoto);
+  const cardElement = card.generateCard();
+  return cardElement;
+};
+
+const section = new Section({ items: initialCards, renderer: renderCard }, '.element');
+console.log(section);
+section.renderItems();
+
+
+
+
+
+
+
+const formContactsValidator = new FormValidator(validationConfig, formContacts);
+const formNewFotoValidator = new FormValidator(validationConfig, formNewFoto);
+formContactsValidator.enableValidation();
+formNewFotoValidator.enableValidation();
+
+
 
 function closePopupOverlay (event) {
   if (event.target !== event.currentTarget) {
