@@ -41,8 +41,8 @@ const validationConfig = {
 };
 
 const userInfoConfig = {
-  userNameSelector: '.form__item_type_name',
-  userJobSelector: '.form__item_type_contact'
+  userNameSelector: '.profile__title',
+  userJobSelector: '.profile__subtitle'
 }
 
 /*function closePopup(item) {
@@ -66,15 +66,16 @@ btnEdit.addEventListener('click', function () {
   formContactsValidator.resetErrorMessage();
   //nameInput.value = profileTitle.textContent;
   //infoInput.value = profileSubtitle.textContent;
+  popupContacts.setInputValues(userInfo.getUserInfo());
   popupContacts.open();
 });
 
-function handleFormSubmit (evt) {
+/*function handleFormSubmit (evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = infoInput.value;
   closePopup(popupContacts);
-};
+};*/
 
 //formContacts.addEventListener('submit', handleFormSubmit);
 
@@ -85,6 +86,7 @@ btnPlus.addEventListener('click', function () {
 });
 
 const userInfo = new UserInfo(userInfoConfig);
+
 
 const selectorPopupZoom = '.popup_zoom';
 
@@ -97,13 +99,13 @@ const selectorContainer = '.element';
 //const selectorPopup = '.popup';
 
 
-function handleNewFotoSubmit (evt) {
+/*function handleNewFotoSubmit (evt) {
   evt.preventDefault();
   container.prepend(createCard(nameNewFoto.value, linkNewFoto.value));
   closePopup(popupNewFoto);
-};
+};*/
 
-formNewFoto.addEventListener('submit', handleNewFotoSubmit);
+//formNewFoto.addEventListener('submit', handleNewFotoSubmit);
 
 
 function renderCard (title, link) {
@@ -121,11 +123,19 @@ const selectorPopupContact = '.popup_contacts';
 
 const popupContacts = new PopupWithForm(selectorPopupContact, (evt) => {
   evt.preventDefault();
+  //userInfo.setUserInfo(popupContacts.getInputValues());
+  console.log("yy");
+  userInfo.setUserInfo(popupContacts.getInputValues());
+  popupContacts.close();
 });
 popupContacts.setEventListeners();
+//console.log(popupContacts);
 
 const popupNewFoto = new PopupWithForm(selectorNewFoto, (evt) => {
   evt.preventDefault();
+  console.log('hi');
+  section.addItem(section.renderItems(popupNewFoto.getInputValues()))
+  popupNewFoto.close();
 });
 popupNewFoto.setEventListeners();
 
