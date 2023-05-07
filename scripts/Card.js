@@ -44,7 +44,7 @@ generateCard() {
   this._setEventListener();
   // Вернём элемент наружу
   return this._element;
-  }
+  };
 };
 
 

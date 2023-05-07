@@ -43,70 +43,28 @@ const validationConfig = {
 const userInfoConfig = {
   userNameSelector: '.profile__title',
   userJobSelector: '.profile__subtitle'
-}
-
-/*function closePopup(item) {
-  item.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeEsc);
 };
 
-function openPopup(item) {
-  item.classList.add('popup_opened')
-  document.addEventListener('keydown', closeEsc);
-};
-
-function closeEsc (evt) {
-  if (evt.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened);
-  };
-};
-*/
 btnEdit.addEventListener('click', function () {
   formContactsValidator.resetErrorMessage();
-  //nameInput.value = profileTitle.textContent;
-  //infoInput.value = profileSubtitle.textContent;
   popupContacts.setInputValues(userInfo.getUserInfo());
   popupContacts.open();
 });
 
-/*function handleFormSubmit (evt) {
-  evt.preventDefault();
-  profileTitle.textContent = nameInput.value;
-  profileSubtitle.textContent = infoInput.value;
-  closePopup(popupContacts);
-};*/
-
-//formContacts.addEventListener('submit', handleFormSubmit);
-
 btnPlus.addEventListener('click', function () {
-  //formNewFoto.reset();
   formNewFotoValidator.resetErrorMessage();
   popupNewFoto.open();
 });
 
 const userInfo = new UserInfo(userInfoConfig);
 
-
 const selectorPopupZoom = '.popup_zoom';
 
 const popupZoom = new PopupWithImage(selectorPopupZoom);
 popupZoom.setEventListeners();
 
-
 const selectorTemplate = '#card-template';
 const selectorContainer = '.element';
-//const selectorPopup = '.popup';
-
-
-/*function handleNewFotoSubmit (evt) {
-  evt.preventDefault();
-  container.prepend(createCard(nameNewFoto.value, linkNewFoto.value));
-  closePopup(popupNewFoto);
-};*/
-
-//formNewFoto.addEventListener('submit', handleNewFotoSubmit);
-
 
 function renderCard (title, link) {
   const card = new Card(title, link, selectorTemplate, popupZoom.open);
@@ -117,45 +75,20 @@ function renderCard (title, link) {
 const section = new Section({ items: initialCards, renderer: renderCard }, selectorContainer);
 section.renderItems();
 
-
 const selectorNewFoto = '.popup_newFoto';
 const selectorPopupContact = '.popup_contacts';
 
-const popupContacts = new PopupWithForm(selectorPopupContact, (evt) => {
-  evt.preventDefault();
-  //userInfo.setUserInfo(popupContacts.getInputValues());
-  console.log("yy");
-  userInfo.setUserInfo(popupContacts.getInputValues());
-  popupContacts.close();
+const popupContacts = new PopupWithForm(selectorPopupContact, (data) => {
+  userInfo.setUserInfo(data);
 });
 popupContacts.setEventListeners();
-//console.log(popupContacts);
 
-const popupNewFoto = new PopupWithForm(selectorNewFoto, (evt) => {
-  evt.preventDefault();
-  console.log('hi');
-  section.addItem(section.renderItems(popupNewFoto.getInputValues()))
-  popupNewFoto.close();
+const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
+  section.addItem(data)
 });
 popupNewFoto.setEventListeners();
-
 
 const formContactsValidator = new FormValidator(validationConfig, formContacts);
 const formNewFotoValidator = new FormValidator(validationConfig, formNewFoto);
 formContactsValidator.enableValidation();
 formNewFotoValidator.enableValidation();
-
-
-
-
-
-/*function closePopupOverlay (event) {
-  if (event.target !== event.currentTarget) {
-    return;
-  }
-  closePopup(event.currentTarget);
-};
-
-popups.forEach(function(popup) {
-  popup.addEventListener('mousedown', closePopupOverlay);
-});*/
