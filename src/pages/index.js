@@ -1,33 +1,13 @@
-import { initialCards } from '../scripts/kard.js';
-import Card from '../scripts/Card.js';
-import FormValidator from '../scripts/FormValidator.js';
-import Section from '../scripts/Section.js';
-import PopupWithImage from '../scripts/PopupWithImage.js';
-import UserInfo from '../scripts/UserInfo.js';
-import PopupWithForm from '../scripts/PopupWithForm.js';
+import { initialCards } from '../components/kard.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 
-
-const popup = document.querySelector('.popup');
-//const popupContacts = document.querySelector('.popup_contacts');
-//const popupNewFoto = document.querySelector('.popup_newFoto');
-//const popupZoom = document.querySelector('.popup_zoom');
 const btnEdit = document.querySelector('.profile__btn-edit');
 const btnPlus = document.querySelector('.profile__btn-plus');
-const btnsClose = document.querySelectorAll('.popup__btn-close');
-//const nameInput = popupContacts.querySelector('.form__item_type_name');
-//const infoInput = popupContacts.querySelector('.form__item_type_contact');
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
-//const popupFotoZoom = popupZoom.querySelector('.popup__fotoZoom');
-//const popupTitle = popupZoom.querySelector('.popup__titleZoom');
-const element = document.querySelector('.element');
-//const nameNewFoto = popupNewFoto.querySelector('.form__item_type_nameFoto');
-//const linkNewFoto = popupNewFoto.querySelector('.form__item_type_newFoto');
-const popups = document.querySelectorAll('.popup');
-//const inputListContacts = Array.from(popupContacts.querySelectorAll('.form__item'));
-//const btnSubmitContacts = popupContacts.querySelector('.form__btn-save');
-//const inputListNewFoto = Array.from(popupNewFoto.querySelectorAll('.form__item'));
-//const btnSubmitNewFoto = popupNewFoto.querySelector('.form__btn-save');
 const formContacts = document.querySelector('.form_contacts');
 const formNewFoto = document.querySelector('.form_newFoto');
 
