@@ -8,10 +8,9 @@ export default class PopupWithImage extends Popup {
   };
 
   open = (title, link) => {
-        //const openZoomFoto = function(title, link) {
           this._popupZoomImage.src = link;
           this._popupTitle.textContent = title;
           this._popupZoomImage.alt = title;
           super.open();
-    };
   };
+};

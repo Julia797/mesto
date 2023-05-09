@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Проект Место</title>
-    <link rel="stylesheet" href="./pages/index.css">
   </head>
 
   <body class="body">
@@ -12,13 +11,13 @@
     <div class="page">
 
       <header class="header">
-        <img class="header__logo" src="./images/header-logo.svg" alt="логотип Место">
+        <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="логотип Место">
       </header>
 
       <main class="content">
 
         <section class="profile indent">
-          <img class="profile__avatar" src="./images/image.jpg" alt="аватарка">
+          <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="аватарка">
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <p class="profile__subtitle">Исследователь океана</p>
@@ -96,7 +95,5 @@
         </div>
       </li>
     </template>
-
-    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
