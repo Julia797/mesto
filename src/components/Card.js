@@ -20,7 +20,11 @@ _handlePlusLike = () => {
 
 _handleDeleteCard = () => {
   this._element.remove();
-  this._element = null
+  this._element = null;
+};
+
+_handleOpenPopupConfirmDeletion = () => {
+  popupConfirmDeletion.open();
 };
 
 _handleOpenZoomFoto = () =>  {
@@ -30,6 +34,7 @@ _handleOpenZoomFoto = () =>  {
 _setEventListener() {
   this._btnLike.addEventListener('click', this._handlePlusLike);
   this._btnDelete.addEventListener('click', this._handleDeleteCard);
+  //this._btnDelete.addEventListener('click', this._handleOpenPopupConfirmDeletion);
   this._elementFoto.addEventListener('click', this._handleOpenZoomFoto);
 };
 

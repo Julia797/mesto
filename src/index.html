@@ -85,6 +85,32 @@
       </div>
     </div>
 
+    <div class="popup popup_confirmDeletion">
+      <div class="popup__container">
+        <h2 class="popup__heading">Вы уверены?</h2>
+        <form class="form form_confirmDeletion" name="confirmDeletion">
+            <button class="form__btn-save" type="submit" aria-label="сохранить">Да</button>
+        </form>
+        <button class="popup__btn-close button" type="button" aria-label="закрыть"></button>
+      </div>
+    </div>
+
+    <div class="popup popup_updateAvatar">
+      <div class="popup__container">
+        <h2 class="popup__heading">Обновить аватар</h2>
+        <form class="form form_updateAvatar novalidate" name="updateAvatar">
+          <fieldset class="form__input">
+            <label class="form__label">
+              <input type="url" id="url-input" placeholder="Введите ссылку на фото" class="form__item form__item_type_updateAvatar" name="link" required>
+              <span class="form__input-error url-input-error"></span>
+            </label>
+          </fieldset>
+          <button class="form__btn-save" type="submit" aria-label="сохранить">Сохранить</button>
+        </form>
+        <button class="popup__btn-close button" type="button" aria-label="закрыть"></button>
+      </div>
+    </div>
+
     <template id="card-template">
        <li class="element__item">
         <img class="element__foto" src="#" alt="">

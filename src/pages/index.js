@@ -11,6 +11,7 @@ const btnEdit = document.querySelector('.profile__btn-edit');
 const btnPlus = document.querySelector('.profile__btn-plus');
 const formContacts = document.querySelector('.form_contacts');
 const formNewFoto = document.querySelector('.form_newFoto');
+const formUpdateAvatar = document.querySelector('.form_updateAvatar');
 
 const validationConfig = {
   formSelector: '.form',
@@ -65,11 +66,41 @@ const popupContacts = new PopupWithForm(selectorPopupContact, (data) => {
 popupContacts.setEventListeners();
 
 const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
-  section.addItem(data)
+  section.addItem(data);
 });
 popupNewFoto.setEventListeners();
+
+
+const selectorUpdateAvatar = '.popup_updateAvatar';
+
+const popupUpdateAvatar = new PopupWithForm(selectorUpdateAvatar, (data) => {
+  section.addItem(data);
+});
+
+console.log(popupUpdateAvatar);
+popupUpdateAvatar.setEventListeners();
+
+
+const profileAvatar = document.querySelector('.profile__avatar');
+console.log(profileAvatar);
+
+profileAvatar.addEventListener('click', () => {
+formNewFotoValidator.resetErrorMessage();
+popupUpdateAvatar.open();
+});
+
+
+
+
+//const selectorConfirmDeletion = '.popup_confirmDeletion';
+
+//const popupConfirmDeletion = Popup(selectorConfirmDeletion);
+//popupConfirmDeletion.open();
+//popupConfirmDeletion.setEventListeners();
 
 const formContactsValidator = new FormValidator(validationConfig, formContacts);
 const formNewFotoValidator = new FormValidator(validationConfig, formNewFoto);
 formContactsValidator.enableValidation();
 formNewFotoValidator.enableValidation();
+const formUpdateValidator = new FormValidator(validationConfig, formUpdateAvatar);
+formUpdateValidator.enableValidation();
