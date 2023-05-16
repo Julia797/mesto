@@ -17,7 +17,9 @@
       <main class="content">
 
         <section class="profile indent">
-          <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="аватарка">
+          <button class="profile__avatar-edit" type="button" aria-label="редактировать фото">
+            <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="аватарка">
+          </button>
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <p class="profile__subtitle">Исследователь океана</p>
@@ -101,7 +103,7 @@
         <form class="form form_updateAvatar novalidate" name="updateAvatar">
           <fieldset class="form__input">
             <label class="form__label">
-              <input type="url" id="url-input" placeholder="Введите ссылку на фото" class="form__item form__item_type_updateAvatar" name="link" required>
+              <input type="url" id="url-input" placeholder="Введите ссылку на фото" class="form__item form__item_type_updateAvatar" name="linkupdateAvatar" required>
               <span class="form__input-error url-input-error"></span>
             </label>
           </fieldset>

@@ -57,13 +57,7 @@ const popupConfirmDeletion = new PopupConfirmDeletion(selectorConfirmDeletion, (
   element.removeElemen();
   popupConfirmDeletion.close();
 });
-//popupConfirmDeletion.open();
 popupConfirmDeletion.setEventListeners();
-
-
-
-
-
 
 function renderCard (title, link) {
   const card = new Card(title, link, selectorTemplate, popupZoom.open, popupConfirmDeletion.open);
@@ -83,7 +77,7 @@ const popupContacts = new PopupWithForm(selectorPopupContact, (data) => {
 popupContacts.setEventListeners();
 
 const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
-  section.addItem(data);
+  section.addItem(renderCard (data.title, data.link));
 });
 popupNewFoto.setEventListeners();
 
@@ -91,18 +85,18 @@ popupNewFoto.setEventListeners();
 const selectorUpdateAvatar = '.popup_updateAvatar';
 
 const popupUpdateAvatar = new PopupWithForm(selectorUpdateAvatar, (data) => {
-  section.addItem(data);
+  document.querySelector('.profile__avatar').src = data.linkupdateAvatar;
+  popupUpdateAvatar.close;
 });
 
-console.log(popupUpdateAvatar);
 popupUpdateAvatar.setEventListeners();
 
 
-const profileAvatar = document.querySelector('.profile__avatar');
-console.log(profileAvatar);
+const profileAvatar = document.querySelector('.profile__avatar-edit');
+
 
 profileAvatar.addEventListener('click', () => {
-formNewFotoValidator.resetErrorMessage();
+formUpdateValidator.resetErrorMessage();
 popupUpdateAvatar.open();
 });
 
