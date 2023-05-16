@@ -1,10 +1,11 @@
 export default class Card {
-  constructor(title, link, selectorTemplate, openZoomFoto) {
-      this._title = title;
-      this._link = link;
-      this._selectorTemplate = selectorTemplate;
-      this._openZoomFoto = openZoomFoto;
-    };
+  constructor(title, link, selectorTemplate, openZoomFoto, openPopupConfirmDeletion) {
+    this._title = title;
+    this._link = link;
+    this._selectorTemplate = selectorTemplate;
+    this._openZoomFoto = openZoomFoto;
+    this._openPopupConfirmDeletion = openPopupConfirmDeletion;
+  };
 
 _getTemplate() {
 // забираем разметку из HTML и клонируем элемент
@@ -19,13 +20,19 @@ _handlePlusLike = () => {
 };
 
 _handleDeleteCard = () => {
+  //this._t.remove();
+  //this._element = null;
+  this._openPopupConfirmDeletion(this);
+};
+
+removeElemen() {
   this._element.remove();
   this._element = null;
 };
 
-_handleOpenPopupConfirmDeletion = () => {
+/*_handleOpenPopupConfirmDeletion = () => {
   popupConfirmDeletion.open();
-};
+};*/
 
 _handleOpenZoomFoto = () =>  {
   this._openZoomFoto(this._title, this._link);
@@ -34,7 +41,7 @@ _handleOpenZoomFoto = () =>  {
 _setEventListener() {
   this._btnLike.addEventListener('click', this._handlePlusLike);
   this._btnDelete.addEventListener('click', this._handleDeleteCard);
-  //this._btnDelete.addEventListener('click', this._handleOpenPopupConfirmDeletion);
+  //this._btnDelete.addEventListener('click', this._deleteIconClick);
   this._elementFoto.addEventListener('click', this._handleOpenZoomFoto);
 };
 

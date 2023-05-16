@@ -6,6 +6,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupConfirmDeletion from '../components/PopupConfirmDeletion.js';
 
 const btnEdit = document.querySelector('.profile__btn-edit');
 const btnPlus = document.querySelector('.profile__btn-plus');
@@ -48,8 +49,24 @@ popupZoom.setEventListeners();
 const selectorTemplate = '#card-template';
 const selectorContainer = '.element';
 
+
+
+const selectorConfirmDeletion = '.popup_confirmDeletion';
+
+const popupConfirmDeletion = new PopupConfirmDeletion(selectorConfirmDeletion, (element) => {
+  element.removeElemen();
+  popupConfirmDeletion.close();
+});
+//popupConfirmDeletion.open();
+popupConfirmDeletion.setEventListeners();
+
+
+
+
+
+
 function renderCard (title, link) {
-  const card = new Card(title, link, selectorTemplate, popupZoom.open);
+  const card = new Card(title, link, selectorTemplate, popupZoom.open, popupConfirmDeletion.open);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -90,13 +107,6 @@ popupUpdateAvatar.open();
 });
 
 
-
-
-//const selectorConfirmDeletion = '.popup_confirmDeletion';
-
-//const popupConfirmDeletion = Popup(selectorConfirmDeletion);
-//popupConfirmDeletion.open();
-//popupConfirmDeletion.setEventListeners();
 
 const formContactsValidator = new FormValidator(validationConfig, formContacts);
 const formNewFotoValidator = new FormValidator(validationConfig, formNewFoto);
