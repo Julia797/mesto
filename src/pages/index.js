@@ -7,12 +7,22 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupConfirmDeletion from '../components/PopupConfirmDeletion.js';
+import Api from '../components/Api.js';
 
 const btnEdit = document.querySelector('.profile__btn-edit');
 const btnPlus = document.querySelector('.profile__btn-plus');
 const formContacts = document.querySelector('.form_contacts');
 const formNewFoto = document.querySelector('.form_newFoto');
 const formUpdateAvatar = document.querySelector('.form_updateAvatar');
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+  headers: {
+    authorization: '4cea4e30-242f-4d37-9183-1699f4441225',
+    'Content-Type': 'application/json'
+  }
+});
+
 
 const validationConfig = {
   formSelector: '.form',
@@ -99,6 +109,7 @@ profileAvatar.addEventListener('click', () => {
 formUpdateValidator.resetErrorMessage();
 popupUpdateAvatar.open();
 });
+
 
 
 
