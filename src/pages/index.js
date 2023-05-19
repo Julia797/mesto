@@ -23,6 +23,15 @@ const api = new Api({
   }
 });
 
+api.getInitialCards()
+  .then((res) => {
+    console.log(res);
+    section.renderItems(res);
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+
 
 const validationConfig = {
   formSelector: '.form',
@@ -59,6 +68,11 @@ popupZoom.setEventListeners();
 const selectorTemplate = '#card-template';
 const selectorContainer = '.element';
 
+/*getInitialCards()
+.then(res => {
+  console.log(res);
+})*/
+
 
 
 const selectorConfirmDeletion = '.popup_confirmDeletion';
@@ -75,8 +89,16 @@ function renderCard (title, link) {
   return cardElement;
 };
 
-const section = new Section({ items: initialCards, renderer: renderCard }, selectorContainer);
-section.renderItems();
+/*function renderCard (title, link) {
+  const card = new Card(title, link, selectorTemplate, popupZoom.open, popupConfirmDeletion.open);
+  const cardElement = card.generateCard();
+  return cardElement;
+};*/
+
+const section = new Section({ renderer: renderCard }, selectorContainer);
+//const section = new Section({ items: initialCards, renderer: renderCard }, selectorContainer);
+//section.renderItems();
+
 
 const selectorNewFoto = '.popup_newFoto';
 const selectorPopupContact = '.popup_contacts';
@@ -86,8 +108,14 @@ const popupContacts = new PopupWithForm(selectorPopupContact, (data) => {
 });
 popupContacts.setEventListeners();
 
+
+//const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
 const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
-  section.addItem(renderCard (data.title, data.link));
+ console.log(data);
+  api.createCard(data)
+  .then(res => {
+    section.addItem(renderCard (res.name, res.link));
+  })
 });
 popupNewFoto.setEventListeners();
 
