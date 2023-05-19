@@ -1,7 +1,8 @@
 export default class Card {
-  constructor(title, link, selectorTemplate, openZoomFoto, openPopupConfirmDeletion) {
-    this._title = title;
-    this._link = link;
+  constructor(data, selectorTemplate, openZoomFoto, openPopupConfirmDeletion) {
+    this.data = data;
+    this._title = data.name;
+    this._link = data.link;
     this._selectorTemplate = selectorTemplate;
     this._openZoomFoto = openZoomFoto;
     this._openPopupConfirmDeletion = openPopupConfirmDeletion;
@@ -25,7 +26,12 @@ _handleDeleteCard = () => {
   this._openPopupConfirmDeletion(this);
 };
 
-removeElemen() {
+//getId() {
+//  console.log(this.data);
+ // return this.data._id
+//};
+
+removeElement() {
   this._element.remove();
   this._element = null;
 };
@@ -53,6 +59,7 @@ generateCard() {
   this._btnDelete = this._element.querySelector('.btn-delete');
   this._btnLike = this._element.querySelector('.btn-like');
   this._elementFoto = this._element.querySelector('.element__foto');
+  this.id = this.data._id;
   this._setEventListener();
   // Вернём элемент наружу
   return this._element;

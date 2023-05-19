@@ -73,18 +73,20 @@ const selectorContainer = '.element';
   console.log(res);
 })*/
 
-
-
 const selectorConfirmDeletion = '.popup_confirmDeletion';
 
-const popupConfirmDeletion = new PopupConfirmDeletion(selectorConfirmDeletion, (element) => {
-  element.removeElemen();
-  popupConfirmDeletion.close();
-});
+const popupConfirmDeletion = new PopupConfirmDeletion(selectorConfirmDeletion, (data) => {
+  console.log(data.id);
+  api.deleteCard(data.id);
+
+    //element.removeElement();
+    popupConfirmDeletion.close();
+  });
+
 popupConfirmDeletion.setEventListeners();
 
-function renderCard (title, link) {
-  const card = new Card(title, link, selectorTemplate, popupZoom.open, popupConfirmDeletion.open);
+function renderCard (data) {
+  const card = new Card(data, selectorTemplate, popupZoom.open, popupConfirmDeletion.open);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -114,7 +116,7 @@ const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
  console.log(data);
   api.createCard(data)
   .then(res => {
-    section.addItem(renderCard (res.name, res.link));
+    section.addItem(renderCard (res));
   })
 });
 popupNewFoto.setEventListeners();

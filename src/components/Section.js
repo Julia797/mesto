@@ -30,7 +30,7 @@ export default class Section {
   renderItems(items) {
     items.forEach(item => {
       //this.addItem(item);
-      this.addItem(this._renderer(item.name, item.link));
+      this.addItem(this._renderer(item));
       //console.log(this._renderer(item.title, item.link));
     });
   };
