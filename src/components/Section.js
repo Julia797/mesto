@@ -38,7 +38,5 @@ export default class Section {
   addItem(element) {
     //this._container.prepend(this._renderer(item.title, item.link));
     this._container.prepend(element);
-
   };
 };
-

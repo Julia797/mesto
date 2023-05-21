@@ -8,6 +8,7 @@ import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupConfirmDeletion from '../components/PopupConfirmDeletion.js';
 import Api from '../components/Api.js';
+import { data } from 'autoprefixer';
 
 const btnEdit = document.querySelector('.profile__btn-edit');
 const btnPlus = document.querySelector('.profile__btn-plus');
@@ -23,14 +24,20 @@ const api = new Api({
   }
 });
 
-api.getInitialCards()
+/*api.getInitialCards()
   .then((res) => {
-    console.log(res);
+    //console.log(res);
     section.renderItems(res);
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
   });
+
+  api.getUserInfo()
+  .then((res) => {
+    console.log(res);
+
+  })*/
 
 
 const validationConfig = {
@@ -44,7 +51,8 @@ const validationConfig = {
 
 const userInfoConfig = {
   userNameSelector: '.profile__title',
-  userJobSelector: '.profile__subtitle'
+  userJobSelector: '.profile__subtitle',
+  userAvatar: '.profile__avatar'
 };
 
 btnEdit.addEventListener('click', function () {
@@ -106,7 +114,8 @@ const selectorNewFoto = '.popup_newFoto';
 const selectorPopupContact = '.popup_contacts';
 
 const popupContacts = new PopupWithForm(selectorPopupContact, (data) => {
-  userInfo.setUserInfo(data);
+  api.setUserInfo(data);
+  //userInfo.setUserInfo(data);
 });
 popupContacts.setEventListeners();
 
@@ -140,6 +149,25 @@ formUpdateValidator.resetErrorMessage();
 popupUpdateAvatar.open();
 });
 
+/*api.getInitialCards()
+  .then((res) => {
+    //console.log(res);
+    section.renderItems(res);
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+
+  api.getUserInfo()
+  .then((res) => {
+    console.log(res);*/
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([dataUserInfo, dataInitialCards]) => {
+     console.log(dataInitialCards);
+  userInfo.setUserInfo(dataUserInfo);
+  section.renderItems(dataInitialCards.reverse());
+    })
 
 
 
