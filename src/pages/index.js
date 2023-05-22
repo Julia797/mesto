@@ -114,15 +114,19 @@ const selectorNewFoto = '.popup_newFoto';
 const selectorPopupContact = '.popup_contacts';
 
 const popupContacts = new PopupWithForm(selectorPopupContact, (data) => {
-  api.setUserInfo(data);
-  //userInfo.setUserInfo(data);
+  api.setUserInfo(data)
+    .then(res =>
+      userInfo.setUserInfo(res))
+    .catch((err) => {
+      console.log('Ошибка. Редактирование профиля не выполнено: ', err);
+    });
 });
 popupContacts.setEventListeners();
 
 
 //const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
 const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
- console.log(data);
+ //console.log(data);
   api.createCard(data)
   .then(res => {
     section.addItem(renderCard (res));
@@ -132,9 +136,15 @@ popupNewFoto.setEventListeners();
 
 
 const selectorUpdateAvatar = '.popup_updateAvatar';
-
 const popupUpdateAvatar = new PopupWithForm(selectorUpdateAvatar, (data) => {
-  document.querySelector('.profile__avatar').src = data.linkupdateAvatar;
+  //document.querySelector('.profile__avatar').src = data.linkupdateAvatar;
+  api.setUpdateAvatar(data)
+  .then(res => {
+    userInfo.setUserInfo(res)
+  })
+  .catch((err) => {
+    console.log('Ошибка. Аватар не обновлен: ', err);
+  });
   popupUpdateAvatar.close;
 });
 
@@ -142,25 +152,11 @@ popupUpdateAvatar.setEventListeners();
 
 
 const profileAvatar = document.querySelector('.profile__avatar-edit');
-
-
 profileAvatar.addEventListener('click', () => {
 formUpdateValidator.resetErrorMessage();
 popupUpdateAvatar.open();
 });
 
-/*api.getInitialCards()
-  .then((res) => {
-    //console.log(res);
-    section.renderItems(res);
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
-
-  api.getUserInfo()
-  .then((res) => {
-    console.log(res);*/
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([dataUserInfo, dataInitialCards]) => {
@@ -168,6 +164,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   userInfo.setUserInfo(dataUserInfo);
   section.renderItems(dataInitialCards.reverse());
     })
+  .catch((err) => {
+    console.log('Ошибка. Начальные данные не созданы: ', err);
+  });
 
 
 

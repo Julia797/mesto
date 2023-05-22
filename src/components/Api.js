@@ -12,7 +12,7 @@ export default class Api {
       }
     })
     .then(res => {
-      console.log(res);
+      //console.log(res);
       if (res.ok) {
         return res.json();
       }
@@ -29,17 +29,18 @@ export default class Api {
     },
     body: JSON.stringify({
       name: data.username,
-      about: data.userjob
-      })
-      /*.then(res => {
-        console.log(res);
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });*/
-    });
+      about: data.userjob,
+    })
+  })
+  .then(res => {
+        //console.log(res);
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+    })
   };
+
 
   getInitialCards() {
     return fetch('https://mesto.nomoreparties.co/v1/cohort-66/cards', {
@@ -48,7 +49,7 @@ export default class Api {
       }
     })
       .then(res => {
-        console.log(res);
+        //console.log(res);
         if (res.ok) {
           return res.json();
         }
@@ -58,24 +59,46 @@ export default class Api {
 
   createCard (data) {
     return fetch('https://mesto.nomoreparties.co/v1/cohort-66/cards', {
-     method: 'POST',
-     headers: {
-      authorization: '4cea4e30-242f-4d37-9183-1699f4441225',
-      'Content-Type': 'application/json'
+      method: 'POST',
+      headers: {
+        authorization: '4cea4e30-242f-4d37-9183-1699f4441225',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         name: data.title,
         link: data.link
       }),
-  })
+    })
       .then(res => {
-        console.log(res);
+        //console.log(res);
         if (res.ok) {
           return res.json();
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       });
   };
+
+  setUpdateAvatar(data) {
+    return fetch('https://mesto.nomoreparties.co/v1/cohort-66/users/me/avatar', {
+      method: 'PATCH',
+      headers: {
+       authorization: '4cea4e30-242f-4d37-9183-1699f4441225',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: data.linkupdateAvatar,
+      })
+    })
+    .then(res => {
+        //console.log(res);
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+  };
+
+
 
   //DELETE https://mesto.nomoreparties.co/v1/cohort-66/cards/cardId
 
