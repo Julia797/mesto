@@ -76,11 +76,6 @@ popupZoom.setEventListeners();
 const selectorTemplate = '#card-template';
 const selectorContainer = '.element';
 
-/*getInitialCards()
-.then(res => {
-  console.log(res);
-})*/
-
 const selectorConfirmDeletion = '.popup_confirmDeletion';
 
 const popupConfirmDeletion = new PopupConfirmDeletion(selectorConfirmDeletion, (element) => {
@@ -92,21 +87,31 @@ const popupConfirmDeletion = new PopupConfirmDeletion(selectorConfirmDeletion, (
 popupConfirmDeletion.setEventListeners();
 
 function renderCard (data) {
-  const card = new Card(data, selectorTemplate, popupZoom.open, popupConfirmDeletion.open, 'b08f93ca18df9cb872cffb45');
+  const card = new Card(data, selectorTemplate, popupZoom.open, popupConfirmDeletion.open, 'b08f93ca18df9cb872cffb45', (btnLike, cardId) => {
+    if (btnLike.classList.contains('btn-like_active')) {
+      api.minusLike(cardId)
+      .then(res => {
+        card.toggleBtnLike(res.likes);
+      })
+      .catch((err) => {
+        console.log('Ошибка. Удаление лайка не выполнено: ', err);
+      });
+    }
+    else {
+      api.plusLike(cardId)
+      .then(res => {
+        card.toggleBtnLike(res.likes);
+      })
+      .catch((err) => {
+        console.log('Ошибка. Добавление лайка не выполнено: ', err);
+      });
+    }
+  });
   const cardElement = card.generateCard();
   return cardElement;
 };
 
-/*function renderCard (title, link) {
-  const card = new Card(title, link, selectorTemplate, popupZoom.open, popupConfirmDeletion.open);
-  const cardElement = card.generateCard();
-  return cardElement;
-};*/
-
 const section = new Section({ renderer: renderCard }, selectorContainer);
-//const section = new Section({ items: initialCards, renderer: renderCard }, selectorContainer);
-//section.renderItems();
-
 
 const selectorNewFoto = '.popup_newFoto';
 const selectorPopupContact = '.popup_contacts';
@@ -163,14 +168,14 @@ popupUpdateAvatar.open();
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([dataUserInfo, dataInitialCards]) => {
-     console.log(dataInitialCards);
-     console.log(dataUserInfo);
-     console.log(dataUserInfo._id);
+     //console.log(dataInitialCards);
+    // console.log(dataUserInfo);
+   //  console.log(dataUserInfo._id);
   userInfo.setUserInfo(dataUserInfo);
-  //console.log(dataUserInfo._userId);
+  //console.log(dataUserInfo);
   section.renderItems(dataInitialCards.reverse());
   //userId = dataUserInfo._id
-  //console.log(userId);
+ // console.log(dataInitialCards.likes.length);
   //return userId = dataUserInfo._id
     })
   .catch((err) => {

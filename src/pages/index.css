@@ -22,6 +22,7 @@
 @import url(../blocks/element/__info/element__info.css);
 @import url(../blocks/element/__title/element__title.css);
 @import url(../blocks/btn-like/btn-like.css);
+@import url(../blocks/element/__likes-counter/element__likes-counter.css);
 @import url(../blocks/btn-like/_active/btn-like_active.css);
 @import url(../blocks/btn-delete/btn-delete.css);
 @import url(../blocks/popup/popup.css);

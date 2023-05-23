@@ -14,6 +14,5 @@ setUserInfo(dataUserInfo) {
   this._userJob.textContent = dataUserInfo.about;
   this._userAvatar.src = dataUserInfo.avatar;
   this._userId = dataUserInfo._id;
-  console.log(this._userId);
   };
 };
