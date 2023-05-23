@@ -13,6 +13,7 @@ setUserInfo(dataUserInfo) {
   this._userName.textContent = dataUserInfo.name;
   this._userJob.textContent = dataUserInfo.about;
   this._userAvatar.src = dataUserInfo.avatar;
-  this._id = dataUserInfo._id;
+  this._userId = dataUserInfo._id;
+  console.log(this._userId);
   };
 };

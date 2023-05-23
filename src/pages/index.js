@@ -83,18 +83,16 @@ const selectorContainer = '.element';
 
 const selectorConfirmDeletion = '.popup_confirmDeletion';
 
-const popupConfirmDeletion = new PopupConfirmDeletion(selectorConfirmDeletion, (data) => {
-  console.log(data.id);
-  api.deleteCard(data.id);
-
-    //element.removeElement();
-    popupConfirmDeletion.close();
-  });
+const popupConfirmDeletion = new PopupConfirmDeletion(selectorConfirmDeletion, (element) => {
+  api.deleteCard(element.data._id);
+  element.removeElement();
+  popupConfirmDeletion.close();
+});
 
 popupConfirmDeletion.setEventListeners();
 
 function renderCard (data) {
-  const card = new Card(data, selectorTemplate, popupZoom.open, popupConfirmDeletion.open);
+  const card = new Card(data, selectorTemplate, popupZoom.open, popupConfirmDeletion.open, 'b08f93ca18df9cb872cffb45');
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -129,7 +127,10 @@ const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
  //console.log(data);
   api.createCard(data)
   .then(res => {
-    section.addItem(renderCard (res));
+    section.addItem(renderCard (res))
+  })
+  .catch((err) => {
+    console.log('Ошибка. Создание новой карточки не выполнено: ', err);
   })
 });
 popupNewFoto.setEventListeners();
@@ -141,6 +142,8 @@ const popupUpdateAvatar = new PopupWithForm(selectorUpdateAvatar, (data) => {
   api.setUpdateAvatar(data)
   .then(res => {
     userInfo.setUserInfo(res)
+    //userId = res._id;
+   // console.log(res);
   })
   .catch((err) => {
     console.log('Ошибка. Аватар не обновлен: ', err);
@@ -161,8 +164,14 @@ popupUpdateAvatar.open();
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([dataUserInfo, dataInitialCards]) => {
      console.log(dataInitialCards);
+     console.log(dataUserInfo);
+     console.log(dataUserInfo._id);
   userInfo.setUserInfo(dataUserInfo);
+  //console.log(dataUserInfo._userId);
   section.renderItems(dataInitialCards.reverse());
+  //userId = dataUserInfo._id
+  //console.log(userId);
+  //return userId = dataUserInfo._id
     })
   .catch((err) => {
     console.log('Ошибка. Начальные данные не созданы: ', err);

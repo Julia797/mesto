@@ -104,11 +104,11 @@ export default class Api {
 
   deleteCard (cardId) {
     return fetch('https://mesto.nomoreparties.co/v1/cohort-66/cards/' + cardId, {
-     method: 'DELETE',
-     headers: {
+      method: 'DELETE',
+      headers: {
       authorization: '4cea4e30-242f-4d37-9183-1699f4441225',
-    },
-  })
+      },
+    })
       .then(res => {
 
       });
