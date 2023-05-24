@@ -14,26 +14,26 @@ export default class Api {
         return res.json();
       }
       return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    })
   };
 
   setUserInfo(data) {
     return fetch('https://mesto.nomoreparties.co/v1/cohort-66/users/me', {
-    method: 'PATCH',
-    headers: {
-     authorization: '4cea4e30-242f-4d37-9183-1699f4441225',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
+      method: 'PATCH',
+      headers: {
+        authorization: '4cea4e30-242f-4d37-9183-1699f4441225',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
       name: data.username,
       about: data.userjob,
+      })
     })
-  })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
     })
   };
 

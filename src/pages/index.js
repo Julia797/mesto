@@ -24,22 +24,6 @@ const api = new Api({
   }
 });
 
-/*api.getInitialCards()
-  .then((res) => {
-    //console.log(res);
-    section.renderItems(res);
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
-
-  api.getUserInfo()
-  .then((res) => {
-    console.log(res);
-
-  })*/
-
-
 const validationConfig = {
   formSelector: '.form',
   inputSelector: '.form__item',
@@ -87,7 +71,7 @@ const popupConfirmDeletion = new PopupConfirmDeletion(selectorConfirmDeletion, (
 popupConfirmDeletion.setEventListeners();
 
 function renderCard (data) {
-  const card = new Card(data, selectorTemplate, popupZoom.open, popupConfirmDeletion.open, 'b08f93ca18df9cb872cffb45', (btnLike, cardId) => {
+  const card = new Card(data, selectorTemplate, popupZoom.open, popupConfirmDeletion.open, userId, (btnLike, cardId) => {
     if (btnLike.classList.contains('btn-like_active')) {
       api.minusLike(cardId)
       .then(res => {
@@ -166,23 +150,17 @@ popupUpdateAvatar.open();
 });
 
 
+let userId;
+
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([dataUserInfo, dataInitialCards]) => {
-     //console.log(dataInitialCards);
-    // console.log(dataUserInfo);
-   //  console.log(dataUserInfo._id);
-  userInfo.setUserInfo(dataUserInfo);
-  //console.log(dataUserInfo);
-  section.renderItems(dataInitialCards.reverse());
-  //userId = dataUserInfo._id
- // console.log(dataInitialCards.likes.length);
-  //return userId = dataUserInfo._id
-    })
+    userId = dataUserInfo._id;
+    userInfo.setUserInfo(dataUserInfo);
+    section.renderItems(dataInitialCards.reverse());
+  })
   .catch((err) => {
     console.log('Ошибка. Начальные данные не созданы: ', err);
   });
-
-
 
 const formContactsValidator = new FormValidator(validationConfig, formContacts);
 const formNewFotoValidator = new FormValidator(validationConfig, formNewFoto);
