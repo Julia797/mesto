@@ -1,5 +1,5 @@
 import './index.css'; //  импорт главного файла стилей
-import { initialCards } from '../components/kard.js';
+//import { initialCards } from '../components/kard.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -63,9 +63,16 @@ const selectorContainer = '.element';
 const selectorConfirmDeletion = '.popup_confirmDeletion';
 
 const popupConfirmDeletion = new PopupConfirmDeletion(selectorConfirmDeletion, (element) => {
-  api.deleteCard(element.data._id);
-  element.removeElement();
-  popupConfirmDeletion.close();
+  api.deleteCard(element.data._id)
+  .then(() => {
+    element.removeElement();
+    popupConfirmDeletion.close();
+  })
+  .catch((err) => {
+    console.log('Ошибка. Удаление карточки не выполнено: ', err);
+  })
+  .finally(() => popupConfirmDeletion.btnSubmit.textContent = 'Да')
+
 });
 
 popupConfirmDeletion.setEventListeners();
@@ -102,12 +109,15 @@ const selectorPopupContact = '.popup_contacts';
 
 const popupContacts = new PopupWithForm(selectorPopupContact, (data) => {
   api.setUserInfo(data)
-    .then(res =>
-      userInfo.setUserInfo(res))
+    .then(res => {
+      userInfo.setUserInfo(res);
+      popupContacts.close();
+    })
     .catch((err) => {
       console.log('Ошибка. Редактирование профиля не выполнено: ', err);
+    })
+    .finally(() => popupContacts.btnSubmit.textContent = 'Сохранить')
     });
-});
 popupContacts.setEventListeners();
 
 
@@ -116,11 +126,13 @@ const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
  //console.log(data);
   api.createCard(data)
   .then(res => {
-    section.addItem(renderCard (res))
+    section.addItem(renderCard (res));
+    popupNewFoto.close();
   })
   .catch((err) => {
     console.log('Ошибка. Создание новой карточки не выполнено: ', err);
   })
+  .finally(() => popupContacts.btnSubmit.textContent = 'Создать')
 });
 popupNewFoto.setEventListeners();
 
@@ -130,14 +142,13 @@ const popupUpdateAvatar = new PopupWithForm(selectorUpdateAvatar, (data) => {
   //document.querySelector('.profile__avatar').src = data.linkupdateAvatar;
   api.setUpdateAvatar(data)
   .then(res => {
-    userInfo.setUserInfo(res)
-    //userId = res._id;
-   // console.log(res);
+    userInfo.setUserInfo(res);
+    popupUpdateAvatar.close();
   })
   .catch((err) => {
     console.log('Ошибка. Аватар не обновлен: ', err);
-  });
-  popupUpdateAvatar.close;
+  })
+  .finally(() => popupUpdateAvatar.btnSubmit.textContent = 'Сохранить')
 });
 
 popupUpdateAvatar.setEventListeners();

@@ -1,6 +1,7 @@
 export default class Api {
-  constructor() {
-
+  constructor(baseUrl, headers ) {
+    this.baseUr = baseUrl;
+    this.headers = headers;
   }
 
   getUserInfo() {
