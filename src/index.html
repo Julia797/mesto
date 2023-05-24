@@ -89,7 +89,7 @@
 
     <div class="popup popup_confirmDeletion">
       <div class="popup__container">
-        <h2 class="popup__heading">Вы уверены?</h2>
+        <h2 class="popup__heading popup__heading-delete">Вы уверены?</h2>
         <form class="form form_confirmDeletion" name="confirmDeletion">
             <button class="form__btn-save" type="submit" aria-label="сохранить">Да</button>
         </form>
@@ -99,14 +99,12 @@
 
     <div class="popup popup_updateAvatar">
       <div class="popup__container">
-        <h2 class="popup__heading">Обновить аватар</h2>
+        <h2 class="popup__heading popup__heading-updateAvatar">Обновить аватар</h2>
         <form class="form form_updateAvatar novalidate" name="updateAvatar">
-          <fieldset class="form__input">
-            <label class="form__label">
-              <input type="url" id="url-input" placeholder="Введите ссылку на фото" class="form__item form__item_type_updateAvatar" name="linkupdateAvatar" required>
-              <span class="form__input-error url-input-error"></span>
-            </label>
-          </fieldset>
+          <label class="form__label">
+            <input type="url" id="url-input" placeholder="Введите ссылку на фото" class="form__item form__item_type_updateAvatar" name="linkupdateAvatar" required>
+            <span class="form__input-error url-input-error"></span>
+          </label>
           <button class="form__btn-save" type="submit" aria-label="сохранить">Сохранить</button>
         </form>
         <button class="popup__btn-close button" type="button" aria-label="закрыть"></button>
@@ -118,8 +116,10 @@
         <img class="element__foto" src="#" alt="">
         <div class="element__info">
           <h2 class="element__title">#</h2>
-          <button class="btn-like" type="button" aria-label="лайк"></button>
-          <span class="element__likes-counter">12</span>
+          <div class="element__likes">
+            <button class="btn-like" type="button" aria-label="лайк"></button>
+            <span class="element__likes-counter">12</span>
+          </div>
           <button class="btn-delete button" type="button" aria-label="удалить"></button>
 
         </div>
