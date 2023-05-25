@@ -1,13 +1,14 @@
 export default class Api {
-  constructor(baseUrl, headers ) {
-    this.baseUr = baseUrl;
-    this.headers = headers;
+  constructor({baseUrl, headers}) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
+    this._authorization = headers.authorization;
   }
 
   getUserInfo() {
-    return fetch('https://nomoreparties.co/v1/cohort-66/users/me', {
+    return fetch(`${this._baseUrl}/users/me`, {
       headers: {
-        authorization: '4cea4e30-242f-4d37-9183-1699f4441225'
+        authorization: this._authorization,
       }
     })
     .then(res => {
@@ -19,12 +20,9 @@ export default class Api {
   };
 
   setUserInfo(data) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-66/users/me', {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: {
-        authorization: '4cea4e30-242f-4d37-9183-1699f4441225',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
       name: data.username,
       about: data.userjob,
@@ -40,9 +38,9 @@ export default class Api {
 
 
   getInitialCards() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-66/cards', {
+    return fetch(`${this._baseUrl}/cards`, {
       headers: {
-        authorization: '4cea4e30-242f-4d37-9183-1699f4441225'
+        authorization: this._authorization,
       }
     })
       .then(res => {
@@ -54,12 +52,9 @@ export default class Api {
   };
 
   createCard (data) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-66/cards', {
+    return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: {
-        authorization: '4cea4e30-242f-4d37-9183-1699f4441225',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: data.title,
         link: data.link
@@ -74,12 +69,9 @@ export default class Api {
   };
 
   setUpdateAvatar(data) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-66/users/me/avatar', {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: {
-       authorization: '4cea4e30-242f-4d37-9183-1699f4441225',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: data.linkupdateAvatar,
       })
@@ -94,10 +86,10 @@ export default class Api {
 
 
   deleteCard (cardId) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-66/cards/' + cardId, {
+    return fetch(`${this._baseUrl}/cards/` + cardId, {
       method: 'DELETE',
       headers: {
-      authorization: '4cea4e30-242f-4d37-9183-1699f4441225',
+      authorization: this._authorization,
       },
     })
     .then(res => {
@@ -106,10 +98,10 @@ export default class Api {
   };
 
   plusLike (cardId) {
-    return fetch(`https://mesto.nomoreparties.co/v1/cohort-66/cards/${cardId}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: {
-      authorization: '4cea4e30-242f-4d37-9183-1699f4441225',
+      authorization: this._authorization,
       },
     })
     .then(res => {
@@ -121,10 +113,10 @@ export default class Api {
   };
 
   minusLike (cardId) {
-    return fetch(`https://mesto.nomoreparties.co/v1/cohort-66/cards/${cardId}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: {
-      authorization: '4cea4e30-242f-4d37-9183-1699f4441225',
+      authorization: this._authorization,
       },
     })
     .then(res => {
@@ -134,8 +126,5 @@ export default class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     })
   };
-
-
-
 };
 

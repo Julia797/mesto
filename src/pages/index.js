@@ -1,5 +1,5 @@
 import './index.css'; //  импорт главного файла стилей
-//import { initialCards } from '../components/kard.js';
+import { validationConfig,  userInfoConfig } from '../components/const.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -24,21 +24,6 @@ const api = new Api({
   }
 });
 
-const validationConfig = {
-  formSelector: '.form',
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__btn-save',
-  inactiveButtonClass: 'form__btn-save_inactive',
-  inputErrorClass: 'form__item_type_error',
-  errorClass: 'form__input-error_active'
-};
-
-const userInfoConfig = {
-  userNameSelector: '.profile__title',
-  userJobSelector: '.profile__subtitle',
-  userAvatar: '.profile__avatar'
-};
-
 btnEdit.addEventListener('click', function () {
   formContactsValidator.resetErrorMessage();
   popupContacts.setInputValues(userInfo.getUserInfo());
@@ -59,7 +44,6 @@ popupZoom.setEventListeners();
 
 const selectorTemplate = '#card-template';
 const selectorContainer = '.element';
-
 const selectorConfirmDeletion = '.popup_confirmDeletion';
 
 const popupConfirmDeletion = new PopupConfirmDeletion(selectorConfirmDeletion, (element) => {
@@ -72,9 +56,7 @@ const popupConfirmDeletion = new PopupConfirmDeletion(selectorConfirmDeletion, (
     console.log('Ошибка. Удаление карточки не выполнено: ', err);
   })
   .finally(() => popupConfirmDeletion.btnSubmit.textContent = 'Да')
-
 });
-
 popupConfirmDeletion.setEventListeners();
 
 function renderCard (data) {
@@ -120,10 +102,7 @@ const popupContacts = new PopupWithForm(selectorPopupContact, (data) => {
     });
 popupContacts.setEventListeners();
 
-
-//const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
 const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
- //console.log(data);
   api.createCard(data)
   .then(res => {
     section.addItem(renderCard (res));
@@ -136,10 +115,8 @@ const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
 });
 popupNewFoto.setEventListeners();
 
-
 const selectorUpdateAvatar = '.popup_updateAvatar';
 const popupUpdateAvatar = new PopupWithForm(selectorUpdateAvatar, (data) => {
-  //document.querySelector('.profile__avatar').src = data.linkupdateAvatar;
   api.setUpdateAvatar(data)
   .then(res => {
     userInfo.setUserInfo(res);
@@ -150,16 +127,13 @@ const popupUpdateAvatar = new PopupWithForm(selectorUpdateAvatar, (data) => {
   })
   .finally(() => popupUpdateAvatar.btnSubmit.textContent = 'Сохранить')
 });
-
 popupUpdateAvatar.setEventListeners();
-
 
 const profileAvatar = document.querySelector('.profile__avatar-edit');
 profileAvatar.addEventListener('click', () => {
 formUpdateValidator.resetErrorMessage();
 popupUpdateAvatar.open();
 });
-
 
 let userId;
 
