@@ -7,7 +7,7 @@ export default class Card {
     this._switchLike = switchLike;
     this._lengthLikes = data.likes.length;
     this._cardId = data._id;
-    this._ownerCardIdOwnerCard = data.owner._id;
+    this._ownerCardId = data.owner._id;
     this._userId = userId;
     this._selectorTemplate = selectorTemplate;
     this._openZoomFoto = openZoomFoto;
@@ -23,8 +23,8 @@ _getTemplate() {
 };
 
 _checkLike() {
-  this._likes.forEach(item => {
-   if (item._id === this._userId) {
+  this._likes.forEach(ownerLike => {
+   if (ownerLike._id === this._userId) {
      this._btnLike.classList.add('btn-like_active');
     return
    }
@@ -51,7 +51,7 @@ removeElement() {
 };
 
 _removeBtnDelete() {
-  if (this._userId != this._ownerCardIdOwnerCard) {
+  if (this._userId != this._ownerCardId) {
     this._btnDelete.remove()
   }
 };

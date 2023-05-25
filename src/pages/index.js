@@ -99,7 +99,7 @@ const popupContacts = new PopupWithForm(selectorPopupContact, (data) => {
       console.log('Ошибка. Редактирование профиля не выполнено: ', err);
     })
     .finally(() => popupContacts.btnSubmit.textContent = 'Сохранить')
-    });
+  });
 popupContacts.setEventListeners();
 
 const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
@@ -111,7 +111,7 @@ const popupNewFoto = new PopupWithForm(selectorNewFoto, (data) => {
   .catch((err) => {
     console.log('Ошибка. Создание новой карточки не выполнено: ', err);
   })
-  .finally(() => popupContacts.btnSubmit.textContent = 'Создать')
+  .finally(() => popupNewFoto.btnSubmit.textContent = 'Создать')
 });
 popupNewFoto.setEventListeners();
 
